@@ -1,0 +1,11 @@
+### Folders
+node_modules
+dist
+doc
+public
+src/assets
+
+### Files
+README.md
+package.json
+pnpm-lock.yaml
