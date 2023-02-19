@@ -13,7 +13,9 @@ function App() {
         />
       </nav>
       <main>
-        <h1>Vite + React + Typescript</h1>
+        <h1 className="text-3xl font-bold underline">
+          Vite + React + Typescript + Tailwind
+        </h1>
       </main>
     </>
   );
