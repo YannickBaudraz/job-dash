@@ -1,3 +1,4 @@
+import { Typography } from '@material-tailwind/react';
 import logo from './assets/logo/logo_transparent.png';
 
 function App() {
@@ -13,9 +14,9 @@ function App() {
         />
       </nav>
       <main>
-        <h1 className="text-3xl font-bold underline">
-          Vite + React + Typescript + Tailwind
-        </h1>
+        <Typography variant="h1" color="indigo">
+          Vite + React + Typescript + Material Tailwind
+        </Typography>
       </main>
     </>
   );
