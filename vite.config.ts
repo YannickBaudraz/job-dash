@@ -8,6 +8,9 @@ export default defineConfig({
     react(),
     checker({
       typescript: true,
+      eslint: {
+        lintCommand: 'eslint --ext .ts,.tsx sr',
+      },
     }),
   ],
 });
