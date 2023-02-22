@@ -5,7 +5,7 @@ import Constants from '../../constants';
 export default function withPageTitle<T extends object>(
   WrappedComponent: ComponentType<T>
 ) {
-  const pageTitle = getTitlePage(WrappedComponent);
+  const pageTitle = getPageTitle(WrappedComponent);
 
   return function WithPageTitle(props: T) {
     return (
@@ -21,7 +21,7 @@ export default function withPageTitle<T extends object>(
     );
   };
 
-  function getTitlePage(Component: ComponentType<T>) {
+  function getPageTitle(Component: ComponentType<T>) {
     const defaultName = 'WithPageTitle WrappedComponent';
     const componentName =
       Component.displayName || Component.name || defaultName;
