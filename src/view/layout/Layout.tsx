@@ -1,18 +1,10 @@
 import { PropsWithChildren } from 'react';
-import logo from '../../assets/logo/logo_transparent.png';
+import { TopBar } from '../navigation/TopBar';
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
     <>
-      <nav>
-        <img
-          src={logo}
-          alt="logo"
-          width="250"
-          height="110"
-          style={{ objectFit: 'cover' }}
-        />
-      </nav>
+      <TopBar />
 
       <main>{children}</main>
     </>
