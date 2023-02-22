@@ -15,8 +15,8 @@
     "stylelint:fix": "stylelint src/**/*.css --fix",
     "prettier:check": "prettier --check src/**/*.{ts,tsx,css}",
     "prettier:fix": "prettier --write src/**/*.{ts,tsx,css}",
-    "check": "npm-run-all eslint:check stylelint:check prettier:check",
-    "fix": "npm-run-all eslint:fix stylelint:fix prettier:fix"
+    "code:check": "npm-run-all eslint:check stylelint:check prettier:check",
+    "code:fix": "npm-run-all eslint:fix stylelint:fix prettier:fix"
   },
   "dependencies": {
     "@material-tailwind/react": "^1.4.2",
