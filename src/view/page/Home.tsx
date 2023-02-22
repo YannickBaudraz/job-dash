@@ -1,17 +1,12 @@
 import { Typography } from '@material-tailwind/react';
-import { Helmet } from 'react-helmet-async';
-import { getPageTitle } from '../../common/utils';
+import withPageTitle from '../../common/components/hoc/withPageTitle';
 
-export default function Home() {
+function Home() {
   return (
-    <>
-      <Helmet>
-        <title>{getPageTitle('Home')}</title>
-      </Helmet>
-
-      <Typography variant="h1">
-        Vite + React + Typescript + Material Tailwind
-      </Typography>
-    </>
+    <Typography variant="h1">
+      Vite + React + Typescript + Material Tailwind
+    </Typography>
   );
 }
+
+export default withPageTitle(Home);
