@@ -5,7 +5,7 @@
 export default function Sidebar() {
   return (
     <>
-      <aside className="min-h-screen w-64">
+      <aside className="min-h-screen">
         <div className="flex h-20 flex-col items-center justify-center">
           <div className="flex items-center">
             <span className="text-2xl font-semibold">Logo</span>

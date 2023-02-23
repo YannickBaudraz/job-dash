@@ -4,11 +4,11 @@ import { TopBar } from '../navigation/TopBar';
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
-    <div className="grid grid-flow-col">
+    <div className="grid grid-cols-[auto,1fr]">
       <Sidebar />
-      <div>
+      <div className="bg-blue-gray-50">
         <TopBar />
-        <main>{children}</main>
+        <main className="mx-auto w-[90%]">{children}</main>
       </div>
     </div>
   );

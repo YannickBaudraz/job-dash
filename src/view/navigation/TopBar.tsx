@@ -4,11 +4,9 @@ import UserMenu from '../../common/components/UserMenu';
 
 export function TopBar() {
   return (
-    <Navbar className="sticky top-0 max-w-full py-2 px-4 lg:px-8 lg:py-4">
-      <div className="mx-auto flex items-center justify-between">
-        <Logo />
-        <UserMenu />
-      </div>
+    <Navbar className="sticky top-0 z-50 flex max-w-full items-center justify-between py-2 px-4 shadow-[0px_5px_5px_0px_#00000024] lg:py-4 lg:px-16">
+      <Logo />
+      <UserMenu />
     </Navbar>
   );
 }
