@@ -1,5 +1,5 @@
-import logo_transparent from '../../assets/logo/logo_transparent.png';
+import logo from '../../assets/logo/logo.svg';
 
-export default function Logo() {
-  return <img src={logo_transparent} alt="logo" className="h-10" />;
+export default function Logo({ className }: { className?: string }) {
+  return <img src={logo} alt="logo" className={className} />;
 }

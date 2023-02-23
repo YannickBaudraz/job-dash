@@ -23,7 +23,7 @@ function Home() {
         <div className="grid grid-cols-[1fr,1fr,1fr,1fr] gap-4">
           {Array.from({ length: 50 }, () => lorem.generateParagraphs(1)).map(
             (paragraph, index) => (
-              <Card key={index}>
+              <Card key={index} color="deep-purple">
                 <CardBody className="text-center">
                   <Typography variant="h4" className="mb-2">
                     Title

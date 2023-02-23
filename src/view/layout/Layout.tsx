@@ -4,9 +4,9 @@ import { TopBar } from '../navigation/TopBar';
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
-    <div className="grid grid-cols-[auto,1fr]">
+    <div className="grid grid-cols-[auto,1fr] bg-blue-gray-50/50">
       <Sidebar />
-      <div className="bg-blue-gray-50">
+      <div>
         <TopBar />
         <main className="mx-auto w-[90%]">{children}</main>
       </div>
