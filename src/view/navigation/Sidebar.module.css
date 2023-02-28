@@ -1,0 +1,14 @@
+.sidebar {
+  @apply z-[51] h-full min-h-screen min-w-[15rem]
+  bg-white bg-opacity-75 shadow-xl backdrop-blur-2xl backdrop-saturate-200;
+
+  transition: margin-left 0.3s linear;
+}
+
+.expanded {
+  @apply ml-0;
+}
+
+.collapsed {
+  @apply -ml-96;
+}

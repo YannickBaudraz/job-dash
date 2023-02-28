@@ -1,20 +1,15 @@
 import { PropsWithChildren } from 'react';
-import logo from '../../assets/logo/logo_transparent.png';
+import Sidebar from '../navigation/Sidebar';
+import { TopBar } from '../navigation/TopBar';
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
-    <>
-      <nav>
-        <img
-          src={logo}
-          alt="logo"
-          width="250"
-          height="110"
-          style={{ objectFit: 'cover' }}
-        />
-      </nav>
-
-      <main>{children}</main>
-    </>
+    <div className="grid grid-cols-[auto,1fr] bg-blue-gray-50/50">
+      <Sidebar />
+      <div>
+        <TopBar />
+        <main className="mx-auto w-[90%]">{children}</main>
+      </div>
+    </div>
   );
 }
