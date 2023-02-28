@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import State = Sidebar.State;
 
 const initialState: State = {
-  isOpen: false,
+  isOpen: true,
 };
 
 export const sidebarSlice = createSlice({
@@ -20,7 +20,7 @@ export namespace Sidebar {
     isOpen: boolean;
   }
 
-  export const Action = sidebarSlice.actions;
+  export const Actions = sidebarSlice.actions;
   export const reducer = sidebarSlice.reducer;
 }
 

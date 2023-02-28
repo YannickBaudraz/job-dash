@@ -1,5 +1,6 @@
 import { Card, CardBody, Typography } from '@material-tailwind/react';
 import { LoremIpsum } from 'lorem-ipsum';
+import { v4 as uuid } from 'uuid';
 import withPageTitle from '../../common/components/hoc/withPageTitle';
 
 const lorem = new LoremIpsum({
@@ -13,6 +14,10 @@ const lorem = new LoremIpsum({
   },
 });
 
+const loremParagraphs = Array.from({ length: 50 }, () =>
+  lorem.generateParagraphs(1)
+);
+
 function Home() {
   return (
     <>
@@ -21,18 +26,16 @@ function Home() {
       </Typography>
       <section>
         <div className="grid grid-cols-[1fr,1fr,1fr,1fr] gap-4">
-          {Array.from({ length: 50 }, () => lorem.generateParagraphs(1)).map(
-            (paragraph, index) => (
-              <Card key={index} color="deep-purple">
-                <CardBody className="text-center">
-                  <Typography variant="h4" className="mb-2">
-                    Title
-                  </Typography>
-                  <Typography className="font-medium">{paragraph}</Typography>
-                </CardBody>
-              </Card>
-            )
-          )}
+          {loremParagraphs.map(p => (
+            <Card key={uuid()} color="deep-purple">
+              <CardBody className="text-center">
+                <Typography variant="h4" className="mb-2">
+                  Title
+                </Typography>
+                <Typography className="font-medium">{p}</Typography>
+              </CardBody>
+            </Card>
+          ))}
         </div>
       </section>
     </>
