@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 import Sidebar from '../navigation/Sidebar';
 import { TopBar } from '../navigation/TopBar';
 
-export default function Layout({ children }: PropsWithChildren) {
+export default function DashboardLayout({ children }: PropsWithChildren) {
   return (
     <div className="grid grid-cols-[auto,1fr] bg-blue-gray-50/50">
       <Sidebar />

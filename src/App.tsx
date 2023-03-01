@@ -1,11 +1,11 @@
-import Layout from './view/layout/Layout';
-import Home from './view/page/Home';
+import AuthLayout from './view/layout/AuthLayout';
+import Register from './view/page/Register';
 
 function App() {
   return (
-    <Layout>
-      <Home />
-    </Layout>
+    <AuthLayout>
+      <Register />
+    </AuthLayout>
   );
 }
 
