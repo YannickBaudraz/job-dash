@@ -1,10 +1,10 @@
 import AuthLayout from './view/layout/AuthLayout';
-import Register from './view/page/Register';
+import Login from './view/page/Login';
 
 function App() {
   return (
     <AuthLayout>
-      <Register />
+      <Login />
     </AuthLayout>
   );
 }
