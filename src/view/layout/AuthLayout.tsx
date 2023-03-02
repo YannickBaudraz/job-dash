@@ -1,9 +1,15 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
+import { useAuth } from 'reactfire';
 import backgroundImage from '../../assets/images/auth_background.jpg';
 import Logo from '../../common/component/media/Logo';
 import useMediaQuery, { MediaQueryRule } from '../../common/hook/useMediaQuery';
 
 export default function AuthLayout({ children }: PropsWithChildren) {
+  const auth = useAuth();
+  useEffect(() => {
+    console.log('auth', auth);
+  }, [auth]);
+
   const isLaptop = useMediaQuery(MediaQueryRule.MIN, 960);
 
   return (
