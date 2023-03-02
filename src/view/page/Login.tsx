@@ -1,4 +1,4 @@
-import { AuthTitle } from '../../common/components/typography/AuthTitle';
+import { AuthTitle } from '../../common/component/typography/AuthTitle';
 import LoginForm from '../form/LoginForm';
 
 export default function Login() {

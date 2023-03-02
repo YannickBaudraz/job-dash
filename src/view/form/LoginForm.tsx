@@ -1,5 +1,5 @@
 import { Button } from '@material-tailwind/react';
-import { ThemedInput } from '../../common/components/form/ThemedInput';
+import { ThemedInput } from '../../common/component/form/ThemedInput';
 import { AuthFormTemplate } from '../template/AuthFormTemplate';
 
 export default function LoginForm() {

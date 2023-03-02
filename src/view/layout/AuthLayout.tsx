@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import backgroundImage from '../../assets/images/auth_background.jpg';
-import Logo from '../../common/components/brand/Logo';
+import Logo from '../../common/component/media/Logo';
 import useMediaQuery, { MediaQueryRule } from '../../common/hook/useMediaQuery';
 
 export default function AuthLayout({ children }: PropsWithChildren) {

@@ -1,7 +1,7 @@
 import { faBriefcase, faChartLine } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Typography } from '@material-tailwind/react';
-import Logo from '../../common/components/brand/Logo';
+import Logo from '../../common/component/media/Logo';
 import { useAppSelector } from '../../store/hooks';
 import styles from './Sidebar.module.css';
 

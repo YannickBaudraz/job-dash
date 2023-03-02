@@ -1,7 +1,7 @@
 import { Card, CardBody, Typography } from '@material-tailwind/react';
 import { LoremIpsum } from 'lorem-ipsum';
 import { v4 as uuid } from 'uuid';
-import withPageTitle from '../../common/components/hoc/withPageTitle';
+import withPageTitle from '../../common/component/hoc/withPageTitle';
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
