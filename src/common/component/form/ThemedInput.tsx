@@ -1,8 +1,13 @@
 import { Input } from '@material-tailwind/react';
-import { ComponentProps } from 'react';
+import { ComponentProps, forwardRef } from 'react';
 
-type ThemedInputProps = Omit<ComponentProps<typeof Input>, 'color'>;
+type Ref = HTMLInputElement;
+type Props = Omit<ComponentProps<typeof Input>, 'color'>;
 
-export function ThemedInput(props: ThemedInputProps) {
-  return <Input color="deep-purple" {...props} />;
-}
+const ThemedInput = forwardRef<Ref, Props>((props, ref) => {
+  return <Input color="deep-purple" {...props} ref={ref} />;
+});
+
+ThemedInput.displayName = 'ThemedInput';
+
+export default ThemedInput;

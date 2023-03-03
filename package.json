@@ -28,6 +28,7 @@
     "lorem-ipsum": "^2.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.3",
     "react-redux": "^8.0.5",
     "react-transition-group": "^4.4.5",
     "reactfire": "^4.2.2",

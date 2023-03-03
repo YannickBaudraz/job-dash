@@ -1,16 +1,23 @@
-type FormTemplateProps = {
+import { BaseSyntheticEvent } from 'react';
+
+type Props = {
+  onSubmit: (e?: BaseSyntheticEvent) => void;
   inputs: JSX.Element;
   mainAction: JSX.Element;
   secondaryActions?: JSX.Element;
 };
 
-export function AuthFormTemplate({
+export function AuthForm({
+  onSubmit,
   inputs,
   mainAction,
   secondaryActions,
-}: FormTemplateProps) {
+}: Props) {
   return (
-    <form className="mx-auto flex max-w-md flex-col gap-4 px-6">
+    <form
+      onSubmit={onSubmit}
+      className="mx-auto flex max-w-md flex-col gap-4 px-6"
+    >
       {inputs}
       {mainAction}
       <div>
