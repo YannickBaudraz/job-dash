@@ -24,7 +24,7 @@ export default function RegisterForm() {
     setPassword(e.target.value);
   }
 
-  async function onMainSubmit() {
+  async function onSubmit() {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -32,11 +32,10 @@ export default function RegisterForm() {
         password
       );
       console.log('User created', userCredential);
-    } catch (error) {
-      console.error('Error creating user', error);
-    } finally {
       setEmail('');
       setPassword('');
+    } catch (error) {
+      console.error('Error creating user', error);
     }
   }
 
@@ -48,9 +47,7 @@ export default function RegisterForm() {
           password={{ value: password, onChange: onPasswordChange }}
         />
       }
-      mainAction={
-        <SubmitButton enable={enableSubmit} onSubmit={onMainSubmit} />
-      }
+      mainAction={<SubmitButton enable={enableSubmit} onSubmit={onSubmit} />}
       secondaryActions={<SecondaryActions />}
     />
   );
