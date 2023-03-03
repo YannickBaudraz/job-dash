@@ -5,7 +5,7 @@ import { Provider as ReduxProvider } from 'react-redux/es/exports';
 import { AuthProvider, useFirebaseApp } from 'reactfire';
 import store from './store/store';
 import AuthLayout from './view/layout/AuthLayout';
-import Register from './view/page/Register';
+import Login from './view/page/Login';
 
 function JobDashApplication() {
   const app = useFirebaseApp();
@@ -17,7 +17,7 @@ function JobDashApplication() {
         <AuthProvider sdk={auth}>
           <ReduxProvider store={store}>
             <AuthLayout>
-              <Register />
+              <Login />
             </AuthLayout>
           </ReduxProvider>
         </AuthProvider>

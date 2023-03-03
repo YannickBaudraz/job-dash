@@ -1,11 +1,11 @@
 import { Button } from '@material-tailwind/react';
 import { FirebaseError } from 'firebase/app';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import GithubButton from '../../common/component/button/social/GithubButton';
 import GoogleButton from '../../common/component/button/social/GoogleButton';
-import ThemedInput from '../../common/component/form/ThemedInput';
+import ThemedInput from '../../common/component/form/input/ThemedInput';
 import AlreadyHaveAccountLink from '../../common/component/Link/AlreadyHaveAccountLink';
 import { AuthInputs, getAuthError } from '../../common/firebase/authErrors';
 import { AuthForm } from '../template/AuthForm';
@@ -21,15 +21,14 @@ export default function RegisterForm() {
     reset,
   } = useForm<AuthInputs>();
 
-  const onSubmit: SubmitHandler<AuthInputs> = async data => {
+  async function onSubmit(data: AuthInputs) {
     try {
       await signInBasically(data);
-      console.log(auth);
     } catch (error) {
       if (!(error instanceof FirebaseError)) throw error;
       handleFirebaseError(error);
     }
-  };
+  }
 
   async function signInBasically(data: AuthInputs) {
     await createUserWithEmailAndPassword(auth, data.email, data.password);
@@ -49,35 +48,14 @@ export default function RegisterForm() {
           {errors.root && (
             <span className="text-sm text-red-400">{errors.root.message}</span>
           )}
-          <div>
-            <ThemedInput
-              label="Email"
-              type="email"
-              aria-invalid={errors.email ? 'true' : 'false'}
-              error={!!errors.email}
-              {...register('email')}
-            />
-            {errors.email && (
-              <span className="text-sm text-red-400">
-                {errors.email.message}
-              </span>
-            )}
-          </div>
-
-          <div>
-            <ThemedInput
-              label="Password"
-              type="password"
-              aria-invalid={errors.password ? 'true' : 'false'}
-              error={!!errors.password}
-              {...register('password')}
-            />
-            {errors.password && (
-              <span className="text-sm text-red-400">
-                {errors.password.message}
-              </span>
-            )}
-          </div>
+          <ThemedInput
+            {...register('email', { required: 'Email is required' })}
+            error={errors.email}
+          />
+          <ThemedInput
+            {...register('password', { required: 'Password is required' })}
+            error={errors.password}
+          />
         </>
       }
       mainAction={
