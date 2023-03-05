@@ -32,7 +32,15 @@ export default function LoginForm() {
   }
 
   async function loginBasically(data: AuthInputs) {
-    await signInWithEmailAndPassword(auth, data.email, data.password);
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      data.email,
+      data.password
+    );
+
+    console.log({ userCredential, auth });
+    alert(`Welcome ${userCredential.user.displayName}`);
+
     reset();
   }
 
