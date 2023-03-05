@@ -11,7 +11,7 @@ export default function GithubButton(props: SocialButtonProps) {
       fullWidth={props.fullWidth}
     >
       <img src={logo} alt="Github logo" className="h-5 w-5" />
-      {props.action} with Github
+      {props.text} with Github
     </Button>
   );
 }

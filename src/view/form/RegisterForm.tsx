@@ -1,6 +1,11 @@
 import { Button } from '@material-tailwind/react';
 import { FirebaseError } from 'firebase/app';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from 'firebase/auth';
 import { useForm } from 'react-hook-form';
 
 import GithubButton from '../../common/component/button/social/GithubButton';
@@ -33,6 +38,12 @@ export default function RegisterForm() {
   async function signInBasically(data: AuthInputs) {
     await createUserWithEmailAndPassword(auth, data.email, data.password);
     reset();
+  }
+
+  async function signInWithGoogle() {
+    const provider = new GoogleAuthProvider();
+    const userCredential = await signInWithPopup(auth, provider);
+    console.log({ userCredential, auth });
   }
 
   function handleFirebaseError(error: FirebaseError) {
@@ -71,8 +82,8 @@ export default function RegisterForm() {
       }
       secondaryActions={
         <>
-          <GoogleButton action="Register" />
-          <GithubButton action="Register" />
+          <GoogleButton text="Register" onClick={signInWithGoogle} />
+          <GithubButton text="Register" />
           <AlreadyHaveAccountLink />
         </>
       }

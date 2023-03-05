@@ -72,8 +72,8 @@ export default function LoginForm() {
       }
       secondaryActions={
         <>
-          <GoogleButton action="Log in" />
-          <GithubButton action="Log in" />
+          <GoogleButton text="Log in" />
+          <GithubButton text="Log in" />
           <NoAccountLink />
         </>
       }

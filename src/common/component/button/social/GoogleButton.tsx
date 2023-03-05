@@ -10,9 +10,10 @@ export default function GoogleButton(props: SocialButtonProps) {
       color="white"
       className="flex items-center justify-center gap-3 border-2 border-black text-black"
       fullWidth={props.fullWidth}
+      onClick={props.onClick}
     >
       <img src={googleBrand} alt="Google logo" className="h-5 w-5" />
-      {props.action} with Google
+      {props.text} with Google
     </Button>
   );
 }
