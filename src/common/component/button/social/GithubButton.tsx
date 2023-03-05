@@ -9,6 +9,7 @@ export default function GithubButton(props: SocialButtonProps) {
       color="gray"
       className="flex items-center justify-center gap-3 bg-gray-900"
       fullWidth={props.fullWidth}
+      onClick={props.onClick}
     >
       <img src={logo} alt="Github logo" className="h-5 w-5" />
       {props.text} with Github

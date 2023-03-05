@@ -40,13 +40,26 @@ const authErrors: AuthError[] = [
     code: 'auth/wrong-password',
     message: 'Wrong password',
   },
-  // The unknown error need to be the last one, ALWAYS
   {
     input: 'root',
-    code: 'auth/unknown',
-    message: 'Something went wrong',
+    code: 'auth/account-exists-with-different-credential',
+    message: 'Account already exists with different credentials',
+  },
+  {
+    input: 'root',
+    code: 'auth/too-many-requests',
+    message: 'Too many requests',
   },
 ];
+
+const unknownError: AuthError = {
+  input: 'root',
+  code: 'auth/unknown',
+  message: 'Something went wrong',
+};
+
+const isFalsePositive = (errorCode: string) =>
+  ['auth/popup-closed-by-user'].includes(errorCode);
 
 /**
  * Get the error object from the list of errors.
@@ -55,9 +68,15 @@ const authErrors: AuthError[] = [
  * @see https://firebase.google.com/docs/auth/admin/errors
  * @see https://github.com/firebase/firebase-js-sdk/blob/a831aec9ec82d146fef7a0f7cf2d31081bd08d4b/packages-exp/auth-exp/src/core/errors.ts
  */
-export function getAuthError(errorCode: string): AuthError {
-  return (
-    authErrors.find(error => error.code === errorCode) ??
-    authErrors[authErrors.length - 1]
-  );
+export function getAuthError(errorCode: string) {
+  if (isFalsePositive(errorCode)) return null;
+
+  const authError = authErrors.find(error => error.code === errorCode);
+  if (!authError)
+    console.error(
+      "Error code doesn't exist in the list of errors :",
+      errorCode
+    );
+
+  return authError ?? unknownError;
 }

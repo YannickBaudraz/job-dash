@@ -46,6 +46,7 @@ export default function LoginForm() {
 
   function handleFirebaseError(error: FirebaseError) {
     const authError = getAuthError(error.code);
+    if (!authError) return;
     setError(authError.input, { type: 'manual', message: authError.message });
   }
 
