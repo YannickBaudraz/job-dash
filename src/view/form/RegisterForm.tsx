@@ -28,19 +28,19 @@ export default function RegisterForm() {
 
   async function onSubmit(data: AuthInputs) {
     try {
-      await signInBasically(data);
+      await registerBasically(data);
     } catch (error) {
       if (!(error instanceof FirebaseError)) throw error;
       handleFirebaseError(error);
     }
   }
 
-  async function signInBasically(data: AuthInputs) {
+  async function registerBasically(data: AuthInputs) {
     await createUserWithEmailAndPassword(auth, data.email, data.password);
     reset();
   }
 
-  async function signInWithGoogle() {
+  async function registerWithGoogle() {
     const provider = new GoogleAuthProvider();
     const userCredential = await signInWithPopup(auth, provider);
     console.log({ userCredential, auth });
@@ -82,7 +82,7 @@ export default function RegisterForm() {
       }
       secondaryActions={
         <>
-          <GoogleButton text="Register" onClick={signInWithGoogle} />
+          <GoogleButton text="Register" onClick={registerWithGoogle} />
           <GithubButton text="Register" />
           <AlreadyHaveAccountLink />
         </>
