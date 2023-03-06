@@ -4,11 +4,13 @@ import GithubButton from '../../common/component/button/social/GithubButton';
 import GoogleButton from '../../common/component/button/social/GoogleButton';
 import ThemedInput from '../../common/component/form/input/ThemedInput';
 import NoAccountLink from '../../common/component/Link/NoAccountLink';
+import Loader from '../../common/component/Loader';
 import useFirebaseAuthForm from '../../common/hook/useFirebaseAuthForm';
 import { AuthForm } from '../template/AuthForm';
 
 export default function LoginForm() {
   const {
+    isLoading,
     register,
     formState: { errors },
     loginWithCredentials,
@@ -21,6 +23,7 @@ export default function LoginForm() {
       onSubmit={loginWithCredentials}
       inputs={
         <>
+          {isLoading && <Loader />}
           {errors.root && (
             <span className="text-sm text-red-400">{errors.root.message}</span>
           )}

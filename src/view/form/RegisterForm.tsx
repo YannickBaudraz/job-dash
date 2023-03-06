@@ -4,6 +4,7 @@ import GithubButton from '../../common/component/button/social/GithubButton';
 import GoogleButton from '../../common/component/button/social/GoogleButton';
 import ThemedInput from '../../common/component/form/input/ThemedInput';
 import AlreadyHaveAccountLink from '../../common/component/Link/AlreadyHaveAccountLink';
+import Loader from '../../common/component/Loader';
 import useFirebaseAuthForm from '../../common/hook/useFirebaseAuthForm';
 import { AuthForm } from '../template/AuthForm';
 
@@ -22,11 +23,7 @@ export default function RegisterForm() {
       onSubmit={registerWithCredentials}
       inputs={
         <>
-          {isLoading && (
-            <div className="flex justify-center">
-              <div className="h-12 w-12 animate-spin rounded-full border-b-4 border-purple-700"></div>
-            </div>
-          )}
+          {isLoading && <Loader />}
           <ThemedInput
             {...register('email', { required: 'Email is required' })}
             error={errors.email}
