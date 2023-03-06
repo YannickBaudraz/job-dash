@@ -6,6 +6,5 @@ public
 src/assets
 
 ### Files
-README.md
 package.json
 pnpm-lock.yaml
