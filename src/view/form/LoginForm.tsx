@@ -1,58 +1,24 @@
 import { Button } from '@material-tailwind/react';
-import { FirebaseError } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { useForm } from 'react-hook-form';
 
 import GithubButton from '../../common/component/button/social/GithubButton';
 import GoogleButton from '../../common/component/button/social/GoogleButton';
 import ThemedInput from '../../common/component/form/input/ThemedInput';
 import NoAccountLink from '../../common/component/Link/NoAccountLink';
-import { AuthInputs, getAuthError } from '../../common/firebase/authErrors';
+import useFirebaseAuthForm from '../../common/hook/useFirebaseAuthForm';
 import { AuthForm } from '../template/AuthForm';
 
 export default function LoginForm() {
-  const auth = getAuth();
-
   const {
     register,
-    handleSubmit,
     formState: { errors },
-    setError,
-    reset,
-  } = useForm<AuthInputs>();
-
-  async function onSubmit(data: AuthInputs) {
-    try {
-      await loginBasically(data);
-      console.log('Successfully logged in', auth.currentUser);
-    } catch (error) {
-      if (!(error instanceof FirebaseError)) throw error;
-      handleFirebaseError(error);
-    }
-  }
-
-  async function loginBasically(data: AuthInputs) {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      data.email,
-      data.password
-    );
-
-    console.log({ userCredential, auth });
-    alert(`Welcome ${userCredential.user.displayName}`);
-
-    reset();
-  }
-
-  function handleFirebaseError(error: FirebaseError) {
-    const authError = getAuthError(error.code);
-    if (!authError) return;
-    setError(authError.input, { type: 'manual', message: authError.message });
-  }
+    loginWithCredentials,
+    authWithGoogle,
+    authWithGitHub,
+  } = useFirebaseAuthForm();
 
   return (
     <AuthForm
-      onSubmit={() => console.log('submit')}
+      onSubmit={loginWithCredentials}
       inputs={
         <>
           {errors.root && (
@@ -69,20 +35,14 @@ export default function LoginForm() {
         </>
       }
       mainAction={
-        <Button
-          size="lg"
-          color="deep-purple"
-          fullWidth
-          type="submit"
-          onClick={handleSubmit(onSubmit)}
-        >
+        <Button size="lg" color="deep-purple" fullWidth type="submit">
           Log in
         </Button>
       }
       secondaryActions={
         <>
-          <GoogleButton text="Log in" />
-          <GithubButton text="Log in" />
+          <GoogleButton text="Log in" onClick={authWithGoogle} />
+          <GithubButton text="Log in" onClick={authWithGitHub} />
           <NoAccountLink />
         </>
       }

@@ -1,94 +1,31 @@
 import { Button } from '@material-tailwind/react';
-import { FirebaseError } from 'firebase/app';
-import {
-  createUserWithEmailAndPassword,
-  getAuth,
-  GithubAuthProvider,
-  GoogleAuthProvider,
-  signInWithPopup,
-  updateProfile,
-} from 'firebase/auth';
-import { useForm } from 'react-hook-form';
 
 import GithubButton from '../../common/component/button/social/GithubButton';
 import GoogleButton from '../../common/component/button/social/GoogleButton';
 import ThemedInput from '../../common/component/form/input/ThemedInput';
 import AlreadyHaveAccountLink from '../../common/component/Link/AlreadyHaveAccountLink';
-import { AuthInputs, getAuthError } from '../../common/firebase/authErrors';
+import useFirebaseAuthForm from '../../common/hook/useFirebaseAuthForm';
 import { AuthForm } from '../template/AuthForm';
 
 export default function RegisterForm() {
-  const auth = getAuth();
-
   const {
+    isLoading,
     register,
-    handleSubmit,
     formState: { errors },
-    setError,
-    reset,
-  } = useForm<AuthInputs>();
-
-  async function registerBasically(data: AuthInputs) {
-    withFirebaseErrorHandling(async () => {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        data.email,
-        data.password
-      );
-
-      const displayName = data.email
-        .split('@')[0]
-        .replace(/[-._]/g, ' ')
-        .replace(/\w\S*/g, l => l.charAt(0).toUpperCase() + l.slice(1));
-      await updateProfile(userCredential.user, { displayName });
-
-      console.log({ userCredential, auth });
-      alert(`Welcome ${userCredential.user.displayName}`);
-
-      reset();
-    });
-  }
-
-  async function registerWithGoogle() {
-    withFirebaseErrorHandling(async () => {
-      const provider = new GoogleAuthProvider();
-      const userCredential = await signInWithPopup(auth, provider);
-
-      console.log({ userCredential, auth });
-      alert(`Welcome ${userCredential.user.displayName}`);
-    });
-  }
-
-  async function registerWithGithub() {
-    withFirebaseErrorHandling(async () => {
-      const provider = new GithubAuthProvider();
-      const userCredential = await signInWithPopup(auth, provider);
-
-      console.log({ userCredential, auth });
-      alert(`Welcome ${userCredential.user.displayName}`);
-    });
-  }
-
-  function withFirebaseErrorHandling(fn: () => Promise<void>) {
-    fn().catch(error => {
-      if (!(error instanceof FirebaseError)) throw error;
-      handleFirebaseError(error);
-    });
-  }
-
-  function handleFirebaseError(error: FirebaseError) {
-    const authError = getAuthError(error.code);
-    if (!authError) return;
-    setError(authError.input, { type: 'manual', message: authError.message });
-  }
+    registerWithCredentials,
+    authWithGoogle,
+    authWithGitHub,
+  } = useFirebaseAuthForm();
 
   return (
     <AuthForm
-      onSubmit={handleSubmit(registerBasically)}
+      onSubmit={registerWithCredentials}
       inputs={
         <>
-          {errors.root && (
-            <span className="text-sm text-red-400">{errors.root.message}</span>
+          {isLoading && (
+            <div className="flex justify-center">
+              <div className="h-12 w-12 animate-spin rounded-full border-b-4 border-purple-700"></div>
+            </div>
           )}
           <ThemedInput
             {...register('email', { required: 'Email is required' })}
@@ -107,11 +44,12 @@ export default function RegisterForm() {
       }
       secondaryActions={
         <>
-          <GoogleButton text="Register" onClick={registerWithGoogle} />
-          <GithubButton text="Register" onClick={registerWithGithub} />
+          <GoogleButton text="Register" onClick={authWithGoogle} />
+          <GithubButton text="Register" onClick={authWithGitHub} />
           <AlreadyHaveAccountLink />
         </>
       }
+      rootError={errors.root}
     />
   );
 }

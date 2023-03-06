@@ -1,4 +1,4 @@
-import { Input } from '@material-tailwind/react';
+import { Input, Typography } from '@material-tailwind/react';
 import { ComponentProps, forwardRef } from 'react';
 import { FieldError } from 'react-hook-form';
 
@@ -27,7 +27,7 @@ const ThemedInput = forwardRef<Ref, Props>(({ error, ...props }, ref) => {
         color="deep-purple"
         {...props}
       />
-      {error && <span className="text-sm text-red-400">{error.message}</span>}
+      {error && <Typography color="red">{error.message}</Typography>}
     </div>
   );
 });
