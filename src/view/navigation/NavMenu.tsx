@@ -1,16 +1,17 @@
 import {
-  faBriefcase,
-  faChartLine,
-  IconDefinition,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+  BriefcaseIcon,
+  DocumentPlusIcon,
+  PresentationChartLineIcon,
+  UserCircleIcon,
+} from '@heroicons/react/24/outline';
 import { Typography } from '@material-tailwind/react';
-import { useMemo } from 'react';
+import * as React from 'react';
+import { ReactElement, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { route } from '../../routing/routes';
 
 type MenuItem = {
-  icon: IconDefinition;
+  icon: ReactElement<React.SVGProps<SVGSVGElement>>;
   title: string;
   path: string;
 };
@@ -19,22 +20,22 @@ export function NavMenu({ className }: { className?: string }) {
   const menuItems = useMemo<MenuItem[]>(
     () => [
       {
-        icon: faChartLine,
+        icon: <PresentationChartLineIcon />,
         title: 'Dashboard',
         path: route('home'),
       },
       {
-        icon: faBriefcase,
+        icon: <BriefcaseIcon />,
         title: 'All jobs',
         path: route('jobs'),
       },
       {
-        icon: faBriefcase,
+        icon: <DocumentPlusIcon />,
         title: 'Add job',
         path: route('jobs.create'),
       },
       {
-        icon: faBriefcase,
+        icon: <UserCircleIcon />,
         title: 'Profile',
         path: route('profile'),
       },
@@ -57,7 +58,7 @@ function NavMenuItem({ path, icon, title }: MenuItem) {
   return (
     <li>
       <Link to={path} className="flex gap-4">
-        <FontAwesomeIcon icon={icon} className="text-2xl text-blue-gray-600" />
+        <icon.type {...icon.props} className="h-6 w-6" />
         <Typography color="blue-gray" className="font-medium">
           {title}
         </Typography>

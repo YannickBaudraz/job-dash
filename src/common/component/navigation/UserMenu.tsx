@@ -1,9 +1,8 @@
 import {
-  faCaretDown,
-  faSignOutAlt,
-  faUser,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+  ArrowRightOnRectangleIcon,
+  ChevronDownIcon,
+  UserIcon,
+} from '@heroicons/react/24/solid';
 import {
   Button,
   Menu,
@@ -17,14 +16,17 @@ export default function UserMenu() {
     <Menu>
       <MenuHandler>
         <Button color="deep-purple" className="flex items-center gap-2">
-          <FontAwesomeIcon icon={faUser} />
+          <UserIcon className="h-4 w-4" />
           Yannick Baudraz
-          <FontAwesomeIcon icon={faCaretDown} />
+          <ChevronDownIcon className="h-4 w-4" />
         </Button>
       </MenuHandler>
       <MenuList>
         <MenuItem onClick={() => console.log('Logout')}>
-          <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" /> Logout
+          <div className="flex items-center gap-2">
+            <ArrowRightOnRectangleIcon className="h-4 w-4" />
+            Logout
+          </div>
         </MenuItem>
       </MenuList>
     </Menu>
