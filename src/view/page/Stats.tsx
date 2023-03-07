@@ -18,11 +18,12 @@ const loremParagraphs = Array.from({ length: 50 }, () =>
   lorem.generateParagraphs(1)
 );
 
-function Home() {
+function Stats() {
   return (
     <>
       <Typography variant="h1">
-        Vite + React + Typescript + Material Tailwind
+        Vite + React + Typescript + Material Tailwind + Redux + Firebase + React
+        Router
       </Typography>
       <section>
         <div className="grid grid-cols-[1fr,1fr,1fr,1fr] gap-4">
@@ -42,4 +43,4 @@ function Home() {
   );
 }
 
-export default withPageTitle(Home);
+export default withPageTitle(Stats);

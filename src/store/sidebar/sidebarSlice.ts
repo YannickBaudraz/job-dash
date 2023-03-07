@@ -16,9 +16,9 @@ export const sidebarSlice = createSlice({
 });
 
 export namespace Sidebar {
-  export interface State {
+  export type State = {
     isOpen: boolean;
-  }
+  };
 
   export const Actions = sidebarSlice.actions;
   export const reducer = sidebarSlice.reducer;
