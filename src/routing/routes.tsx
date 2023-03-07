@@ -1,20 +1,24 @@
 import { RouteObject } from 'react-router-dom';
 import AuthLayout from '../view/layout/AuthLayout';
 import DashboardLayout from '../view/layout/DashboardLayout';
-import AllJobs from '../view/page/AllJobs';
-import Login from '../view/page/Login';
-import Register from '../view/page/Register';
-import Stats from '../view/page/Stats';
+import Login from '../view/page/auth/Login';
+import Register from '../view/page/auth/Register';
+import Dashboard from '../view/page/Dashboard';
+import CreateJob from '../view/page/job/CreateJob';
+import AllJobs from '../view/page/job/Jobs';
+import { Profile } from '../view/page/profile/Profile';
 
 type RoutePathMap<RoutePath extends Record<string, string>> = {
   readonly [K in keyof RoutePath]: RoutePath[K];
 };
 
 const RoutePaths = {
-  login: '/login',
-  register: '/register',
   home: '/',
   jobs: '/jobs',
+  'jobs.create': '/jobs/create',
+  profile: '/profile',
+  login: '/login',
+  register: '/register',
 } as const;
 
 type RoutePath = RoutePathMap<typeof RoutePaths>;
@@ -25,6 +29,20 @@ function route<T extends keyof RoutePath>(path: T): RoutePath[T] {
 
 const routes: RouteObject[] = [
   {
+    element: <DashboardLayout />,
+    children: [
+      { index: true, element: <Dashboard /> },
+      {
+        path: route('jobs'),
+        children: [
+          { index: true, element: <AllJobs /> },
+          { path: route('jobs.create'), element: <CreateJob /> },
+        ],
+      },
+      { path: route('profile'), element: <Profile /> },
+    ],
+  },
+  {
     element: <AuthLayout />,
     children: [
       { path: route('login'), element: <Login />, index: true },
@@ -32,11 +50,8 @@ const routes: RouteObject[] = [
     ],
   },
   {
-    element: <DashboardLayout />,
-    children: [
-      { path: route('home'), element: <Stats />, index: true },
-      { path: route('jobs'), element: <AllJobs /> },
-    ],
+    path: '*',
+    element: <div>404</div>,
   },
 ];
 

@@ -1,7 +1,7 @@
 import { Typography } from '@material-tailwind/react';
-import withPageTitle from '../../common/component/hoc/withPageTitle';
+import withPageTitle from '../../../common/component/hoc/withPageTitle';
 
-function AllJobs() {
+function Jobs() {
   return (
     <>
       <Typography variant="h1">All Jobs page</Typography>
@@ -9,4 +9,4 @@ function AllJobs() {
   );
 }
 
-export default withPageTitle(AllJobs);
+export default withPageTitle(Jobs);

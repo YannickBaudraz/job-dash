@@ -18,7 +18,7 @@ const loremParagraphs = Array.from({ length: 50 }, () =>
   lorem.generateParagraphs(1)
 );
 
-function Stats() {
+function Dashboard() {
   return (
     <>
       <Typography variant="h1">
@@ -43,4 +43,4 @@ function Stats() {
   );
 }
 
-export default withPageTitle(Stats);
+export default withPageTitle(Dashboard);
