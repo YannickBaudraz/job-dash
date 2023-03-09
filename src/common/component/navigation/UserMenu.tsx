@@ -26,7 +26,7 @@ export default function UserMenu() {
       <MenuHandler>
         <Button color="deep-purple" className="flex items-center gap-2">
           <UserIcon className="h-4 w-4" />
-          Yannick Baudraz
+          {auth.currentUser?.displayName ?? auth.currentUser?.email}
           <ChevronDownIcon className="h-4 w-4" />
         </Button>
       </MenuHandler>
