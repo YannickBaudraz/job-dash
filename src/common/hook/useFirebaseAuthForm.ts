@@ -5,7 +5,6 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
-  updateProfile,
 } from 'firebase/auth';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -59,14 +58,8 @@ export default function useFirebaseAuthForm() {
         email,
         password
       );
-
-      const displayName = email
-        .split('@')[0]
-        .replace(/[-._]/g, ' ')
-        .replace(/\w\S*/g, l => l.charAt(0).toUpperCase() + l.slice(1));
-      await updateProfile(userCredential.user, { displayName });
-
       reset();
+      return userCredential;
     } catch (error) {
       handleFirebaseError(error);
     } finally {
@@ -83,8 +76,8 @@ export default function useFirebaseAuthForm() {
         email,
         password
       );
-      alert(`Welcome ${userCredential.user.displayName}`);
       reset();
+      return userCredential;
     } catch (error) {
       handleFirebaseError(error);
     } finally {

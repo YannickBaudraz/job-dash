@@ -1,12 +1,14 @@
 import { Typography } from '@material-tailwind/react';
 import withPageTitle from '../../../common/component/hoc/withPageTitle';
 
-function CreateJob() {
+function NewJob() {
   return (
     <>
-      <Typography variant="h1">Create Job page</Typography>
+      <Typography variant="h2">New Job page</Typography>
     </>
   );
 }
 
-export default withPageTitle(CreateJob);
+NewJob.displayName = 'NewJob';
+
+export default withPageTitle(NewJob);

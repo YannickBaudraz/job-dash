@@ -4,9 +4,9 @@ import DashboardLayout from '../view/layout/DashboardLayout';
 import Login from '../view/page/auth/Login';
 import Register from '../view/page/auth/Register';
 import Dashboard from '../view/page/Dashboard';
-import CreateJob from '../view/page/job/CreateJob';
 import AllJobs from '../view/page/job/Jobs';
-import { Profile } from '../view/page/profile/Profile';
+import NewJob from '../view/page/job/NewJob';
+import Profile from '../view/page/Profile';
 
 type RoutePathMap<RoutePath extends Record<string, string>> = {
   readonly [K in keyof RoutePath]: RoutePath[K];
@@ -36,7 +36,7 @@ const routes: RouteObject[] = [
         path: route('jobs'),
         children: [
           { index: true, element: <AllJobs /> },
-          { path: route('jobs.create'), element: <CreateJob /> },
+          { path: route('jobs.create'), element: <NewJob /> },
         ],
       },
       { path: route('profile'), element: <Profile /> },
