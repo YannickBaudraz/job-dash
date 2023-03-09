@@ -10,8 +10,17 @@ import {
   MenuItem,
   MenuList,
 } from '@material-tailwind/react';
+import { signOut } from 'firebase/auth';
+import { useCallback } from 'react';
+import { useAuth } from 'reactfire';
 
 export default function UserMenu() {
+  const auth = useAuth();
+
+  const logOut = useCallback(async () => {
+    await signOut(auth);
+  }, []);
+
   return (
     <Menu>
       <MenuHandler>
@@ -22,7 +31,7 @@ export default function UserMenu() {
         </Button>
       </MenuHandler>
       <MenuList>
-        <MenuItem onClick={() => console.log('Logout')}>
+        <MenuItem onClick={logOut}>
           <div className="flex items-center gap-2">
             <ArrowRightOnRectangleIcon className="h-4 w-4" />
             Logout
