@@ -9,4 +9,6 @@ function Profile() {
   );
 }
 
+Profile.displayName = 'Profile';
+
 export default withPageTitle(Profile);

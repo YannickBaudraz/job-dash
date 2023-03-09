@@ -13,7 +13,7 @@ import { route } from '../../routing/routes';
 type MenuItem = {
   icon: ReactElement<React.SVGProps<SVGSVGElement>>;
   title: string;
-  path: string;
+  path: ReturnType<typeof route>;
 };
 
 export default function NavMenu({ className }: { className?: string }) {
@@ -31,7 +31,7 @@ export default function NavMenu({ className }: { className?: string }) {
       },
       {
         icon: <DocumentPlusIcon />,
-        title: 'Add job',
+        title: 'New job',
         path: route('jobs.create'),
       },
       {

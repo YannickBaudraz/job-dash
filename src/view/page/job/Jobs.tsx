@@ -9,4 +9,6 @@ function Jobs() {
   );
 }
 
+Jobs.displayName = 'Jobs';
+
 export default withPageTitle(Jobs);

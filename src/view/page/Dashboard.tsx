@@ -10,4 +10,6 @@ function Dashboard() {
   );
 }
 
+Dashboard.displayName = 'Dashboard';
+
 export default withPageTitle(Dashboard);
