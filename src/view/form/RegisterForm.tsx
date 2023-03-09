@@ -4,7 +4,7 @@ import GithubButton from '../../common/component/button/social/GithubButton';
 import GoogleButton from '../../common/component/button/social/GoogleButton';
 import ThemedInput from '../../common/component/form/input/ThemedInput';
 import AlreadyHaveAccountLink from '../../common/component/Link/AlreadyHaveAccountLink';
-import Loader from '../../common/component/Loader';
+import Loader from '../../common/component/loader/Loader';
 import useFirebaseAuthForm from '../../common/hook/useFirebaseAuthForm';
 import { AuthForm } from '../template/AuthForm';
 

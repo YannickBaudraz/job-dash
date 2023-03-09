@@ -83,8 +83,8 @@ export default function useFirebaseAuthForm() {
         email,
         password
       );
-      alert(`Welcome ${userCredential.user.displayName}`);
       reset();
+      return userCredential;
     } catch (error) {
       handleFirebaseError(error);
     } finally {

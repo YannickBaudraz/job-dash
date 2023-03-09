@@ -6,7 +6,7 @@ import Register from '../view/page/auth/Register';
 import Dashboard from '../view/page/Dashboard';
 import CreateJob from '../view/page/job/CreateJob';
 import AllJobs from '../view/page/job/Jobs';
-import { Profile } from '../view/page/profile/Profile';
+import Profile from '../view/page/Profile';
 
 type RoutePathMap<RoutePath extends Record<string, string>> = {
   readonly [K in keyof RoutePath]: RoutePath[K];
