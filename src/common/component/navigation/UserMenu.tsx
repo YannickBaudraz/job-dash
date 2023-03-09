@@ -10,28 +10,25 @@ import {
   MenuItem,
   MenuList,
 } from '@material-tailwind/react';
-import { signOut } from 'firebase/auth';
-import { useCallback } from 'react';
-import { useAuth } from 'reactfire';
+import { useState } from 'react';
+import { useAuth, useUser } from 'reactfire';
 
 export default function UserMenu() {
   const auth = useAuth();
-
-  const logOut = useCallback(async () => {
-    await signOut(auth);
-  }, []);
+  const { data: user } = useUser();
+  const [userName] = useState(user?.displayName ?? user?.email ?? 'User');
 
   return (
     <Menu>
       <MenuHandler>
         <Button color="deep-purple" className="flex items-center gap-2">
           <UserIcon className="h-4 w-4" />
-          {auth.currentUser?.displayName ?? auth.currentUser?.email}
+          {userName}
           <ChevronDownIcon className="h-4 w-4" />
         </Button>
       </MenuHandler>
       <MenuList>
-        <MenuItem onClick={logOut}>
+        <MenuItem onClick={auth.signOut}>
           <div className="flex items-center gap-2">
             <ArrowRightOnRectangleIcon className="h-4 w-4" />
             Logout
