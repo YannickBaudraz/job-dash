@@ -1,16 +1,23 @@
 import { ComponentType } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Document } from '../../../store/document/documentSlice';
+import { useAppDispatch } from '../../../store/hooks';
 import Constants from '../../constants';
 
 export default function withPageTitle<T extends object>(
   WrappedComponent: ComponentType<T>
 ) {
   const pageTitle = getPageTitle(WrappedComponent);
-
   return function WithPageTitle(props: T) {
+    const dispatch = useAppDispatch();
+
     return (
       <>
-        <Helmet>
+        <Helmet
+          onChangeClientState={newState => {
+            dispatch(Document.Actions.setTitle(newState.title));
+          }}
+        >
           <title>
             {Constants.App.Name} - {pageTitle}
           </title>

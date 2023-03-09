@@ -3,9 +3,8 @@ import { getAuth } from 'firebase/auth';
 import { HelmetProvider } from 'react-helmet-async';
 import { Provider as ReduxProvider } from 'react-redux/es/exports';
 import { AuthProvider, useFirebaseApp } from 'reactfire';
+import Router from './routing/Router';
 import store from './store/store';
-import AuthLayout from './view/layout/AuthLayout';
-import Login from './view/page/Login';
 
 function JobDashApplication() {
   const app = useFirebaseApp();
@@ -16,9 +15,7 @@ function JobDashApplication() {
       <ThemeProvider>
         <AuthProvider sdk={auth}>
           <ReduxProvider store={store}>
-            <AuthLayout>
-              <Login />
-            </AuthLayout>
+            <Router />
           </ReduxProvider>
         </AuthProvider>
       </ThemeProvider>
