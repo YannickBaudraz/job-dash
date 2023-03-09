@@ -28,7 +28,7 @@ export default function UserMenu() {
         </Button>
       </MenuHandler>
       <MenuList>
-        <MenuItem onClick={auth.signOut}>
+        <MenuItem onClick={() => auth.signOut()}>
           <div className="flex items-center gap-2">
             <ArrowRightOnRectangleIcon className="h-4 w-4" />
             Logout
