@@ -1,5 +1,5 @@
-import { AuthTitle } from '../../common/component/typography/AuthTitle';
-import RegisterForm from '../form/RegisterForm';
+import { AuthTitle } from '../../../common/component/typography/AuthTitle';
+import RegisterForm from '../../form/RegisterForm';
 
 export default function Register() {
   return (
