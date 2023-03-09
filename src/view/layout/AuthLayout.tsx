@@ -1,11 +1,22 @@
+import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import backgroundImage from '../../assets/images/auth_background.jpg';
 import Logo from '../../common/component/media/Logo';
-import useMediaQuery, { MediaQueryRule } from '../../common/hook/useMediaQuery';
+import useMediaQuery from '../../common/hook/useMediaQuery';
 import AuthGate from '../../routing/AuthGate';
 
 export default function AuthLayout() {
-  const isLaptop = useMediaQuery(MediaQueryRule.MIN, 960);
+  const [imgLoaded, setImgLoaded] = useState(false);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = backgroundImage;
+    img.onload = () => setImgLoaded(true);
+  }, []);
+
+  const isLaptop = useMediaQuery('min-width', 960);
+
+  if (!imgLoaded) return null;
 
   return (
     <AuthGate requireGuest>

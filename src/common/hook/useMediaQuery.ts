@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+export type MediaQueryRule = 'min-width' | 'max-width';
+
 export default function useMediaQuery(
   rule: MediaQueryRule,
   size: number
@@ -16,9 +18,4 @@ export default function useMediaQuery(
   }, [matches, query]);
 
   return matches;
-}
-
-export enum MediaQueryRule {
-  MIN = 'min-width',
-  MAX = 'max-width',
 }
