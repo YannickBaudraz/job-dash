@@ -1,6 +1,6 @@
 import Logo from '../../common/component/media/Logo';
 import { useAppSelector } from '../../store/hooks';
-import { NavMenu } from './NavMenu';
+import NavMenu from './NavMenu';
 import styles from './Sidebar.module.css';
 
 /**
@@ -20,7 +20,7 @@ export default function Sidebar() {
         <header className="flex h-24 items-center justify-center">
           <Logo className="px-10 mix-blend-darken" />
         </header>
-        <NavMenu className="mt-12 ml-10" />
+        <NavMenu className="mt-8" />
       </nav>
     </aside>
   );
