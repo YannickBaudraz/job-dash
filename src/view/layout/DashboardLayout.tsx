@@ -5,6 +5,7 @@ import useMediaQuery, {
 } from '../../common/hook/useMediaQuery';
 import AuthGate from '../../routing/AuthGate';
 import LaptopSidebar from '../navigation/LaptopSidebar';
+import MobileSidebar from '../navigation/MobileSidebar';
 import { TopBar } from '../navigation/TopBar';
 
 export default function DashboardLayout() {
@@ -13,7 +14,7 @@ export default function DashboardLayout() {
   return (
     <AuthGate>
       <div className="grid grid-cols-[auto,1fr] bg-blue-gray-50/50">
-        {isLaptop && <LaptopSidebar />}
+        {isLaptop ? <LaptopSidebar /> : <MobileSidebar />}
         <div>
           <TopBar />
           <main className="mx-auto w-[90%] pt-10">
