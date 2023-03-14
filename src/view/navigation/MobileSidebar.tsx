@@ -1,6 +1,7 @@
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import { IconButton } from '@material-tailwind/react';
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { Sidebar } from '../../store/sidebar/sidebarSlice';
 import styles from './MobileSidebar.module.css';
@@ -11,9 +12,10 @@ export default function MobileSidebar() {
   const dispatch = useAppDispatch();
   const close = () => dispatch(Sidebar.Actions.close());
 
+  const location = useLocation();
   useEffect(() => {
     close();
-  }, []);
+  }, [location]);
 
   return (
     <aside
