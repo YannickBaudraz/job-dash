@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import ClickOutsideSidebarProvider from '../../common/context/sidebar/ClickOutsideSidebarProvider';
 import useMediaQuery, {
   MediaRule,
   MediaSize,
@@ -13,14 +14,16 @@ export default function DashboardLayout() {
 
   return (
     <AuthGate>
-      <div className="grid grid-cols-[auto,1fr] bg-blue-gray-50/50">
-        {isLaptop ? <LaptopSidebar /> : <MobileSidebar />}
-        <div>
-          <TopBar />
-          <main className="mx-auto w-[90%] pt-10">
-            <Outlet />
-          </main>
-        </div>
+      <div className="grid h-screen grid-cols-[auto,min-content] bg-blue-gray-50/50 lg:grid-cols-[min-content,1fr]">
+        <ClickOutsideSidebarProvider>
+          {isLaptop ? <LaptopSidebar /> : <MobileSidebar />}
+          <div>
+            <TopBar />
+            <main className="mx-auto w-[90%] pt-10">
+              <Outlet />
+            </main>
+          </div>
+        </ClickOutsideSidebarProvider>
       </div>
     </AuthGate>
   );

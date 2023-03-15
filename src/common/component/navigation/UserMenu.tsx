@@ -9,7 +9,6 @@ import {
   MenuHandler,
   MenuItem,
   MenuList,
-  Typography,
 } from '@material-tailwind/react';
 import { useState } from 'react';
 import { useAuth, useUser } from 'reactfire';
@@ -32,13 +31,13 @@ export default function UserMenu() {
       </MenuHandler>
       <MenuList>
         {!isLaptop && (
-          <MenuItem disabled>
-            <Typography color="deep-purple" className="font-medium">
-              {userName}
-            </Typography>
-          </MenuItem>
+          <>
+            <MenuItem disabled className="opacity-100">
+              <div className="">{userName}</div>
+            </MenuItem>
+            <hr className="mb-2" />
+          </>
         )}
-        <hr className="my-2" />
         <MenuItem onClick={() => auth.signOut()}>
           <div className="flex items-center gap-2">
             <ArrowRightOnRectangleIcon className="h-4 w-4" />
