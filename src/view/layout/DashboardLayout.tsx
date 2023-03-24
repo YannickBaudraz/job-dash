@@ -10,7 +10,7 @@ export default function DashboardLayout() {
         <Sidebar />
         <div>
           <TopBar />
-          <main className="mx-auto w-[90%] pt-10">
+          <main className="mx-auto w-[90%] pt-16">
             <Outlet />
           </main>
         </div>
