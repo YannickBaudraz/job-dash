@@ -1,4 +1,4 @@
-import store from './store';
+import index from './index';
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof index.getState>;
+export type AppDispatch = typeof index.dispatch;
