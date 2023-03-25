@@ -66,7 +66,7 @@ export default function NewJobForm() {
           <Typography variant="h2">Add job</Typography>
         </CardHeader>
 
-        <CardBody className="grid grid-flow-dense gap-6 lg:grid-cols-4">
+        <CardBody className="grid grid-flow-dense gap-6 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           <ThemedInput
             {...register('position', { required: 'Email is required' })}
             error={errors.position}
@@ -93,11 +93,11 @@ export default function NewJobForm() {
           <ThemedInput {...register('submissionDate')} type="date" />
           <ThemedTextArea
             {...register('notes')}
-            containerClassName="lg:col-span-2"
+            containerClassName="md:col-span-2"
           />
         </CardBody>
 
-        <CardFooter className="mx-auto flex gap-4 lg:w-1/2">
+        <CardFooter className="mx-auto flex w-full flex-col gap-4 lg:w-1/2 lg:flex-row">
           <Button
             type="reset"
             variant="outlined"

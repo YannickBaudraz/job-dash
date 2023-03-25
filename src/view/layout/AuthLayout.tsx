@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import backgroundImage from '../../assets/images/auth_background.jpg';
 import Logo from '../../common/component/media/Logo';
-import useMediaQuery from '../../common/hook/useMediaQuery';
+import useMediaQuery, {
+  MediaRule,
+  MediaSize,
+} from '../../common/hook/useMediaQuery';
 import AuthGate from '../../routing/AuthGate';
 
 export default function AuthLayout() {
@@ -14,7 +17,7 @@ export default function AuthLayout() {
     img.onload = () => setImgLoaded(true);
   }, []);
 
-  const isLaptop = useMediaQuery('min-width', 960);
+  const isLaptop = useMediaQuery(MediaRule.Min, MediaSize.Lg);
 
   if (!imgLoaded) return null;
 

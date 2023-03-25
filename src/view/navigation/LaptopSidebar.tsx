@@ -1,18 +1,18 @@
 import Logo from '../../common/component/media/Logo';
 import { useAppSelector } from '../../store/hooks';
+import styles from './LaptopSidebar.module.css';
 import NavMenu from './NavMenu';
-import styles from './Sidebar.module.css';
 
 /**
  * Using tailwindcss
  * @constructor
  */
-export default function Sidebar() {
+export default function LaptopSidebar() {
   const { isOpen } = useAppSelector(state => state.sidebar);
 
   return (
     <aside
-      className={`${styles.sidebar} ${
+      className={`${styles.laptopSidebar} ${
         isOpen ? styles.expanded : styles.collapsed
       }`}
     >
