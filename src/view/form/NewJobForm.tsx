@@ -9,6 +9,7 @@ import {
 import { addDoc, collection } from 'firebase/firestore';
 import { useCallback } from 'react';
 import { useController, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { useFirestore, useUser } from 'reactfire';
 import FirestoreSelect from '../../common/component/form/input/FirestoreSelect';
 import ThemedInput from '../../common/component/form/input/ThemedInput';
@@ -17,6 +18,7 @@ import FirestoreModelConverter from '../../common/converter/FirestoreModelConver
 import modelConverter from '../../common/converter/ModelConverter';
 import { cleanBeforeSentToFirestore } from '../../common/firebase/firebaseUtils';
 import { CreateJob, Job } from '../../model/Job';
+import { route } from '../../routing/routes';
 
 export type AddJobInputs = Omit<
   Job,
@@ -42,6 +44,7 @@ export default function NewJobForm() {
 
   const firestore = useFirestore();
   const { data: user } = useUser();
+  const navigate = useNavigate();
   const addJob = useCallback(async (data: AddJobInputs) => {
     if (!user) throw new Error('User is not logged in');
 
@@ -51,8 +54,10 @@ export default function NewJobForm() {
     const jobsCollection = collection(firestore, 'jobs').withConverter(
       new FirestoreModelConverter<CreateJob>().converter
     );
+
     await addDoc(jobsCollection, cleanedData);
-    reset();
+
+    navigate(route('jobs'));
   }, []);
 
   return (
@@ -95,7 +100,7 @@ export default function NewJobForm() {
             containerClassName="md:col-span-2"
           />
         </CardBody>
-        Un oubli
+
         <CardFooter className="mx-auto flex w-full flex-col gap-4 lg:w-1/2 lg:flex-row">
           <Button
             type="reset"
