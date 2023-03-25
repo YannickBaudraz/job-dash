@@ -38,9 +38,29 @@ export default function NewJobForm() {
     reset,
     control,
   } = useForm<AddJobInputs>();
-  const goal = useController({ name: 'goal', control });
-  const status = useController({ name: 'status', control });
-  const types = useController({ name: 'applicationType', control });
+  const position = register('position', { required: 'Email is required' });
+  const company = register('company', { required: 'Company is required' });
+  const location = register('location', { required: 'Location is required' });
+  const address = register('address', { required: 'Address is required' });
+  const goal = useController({
+    name: 'goal',
+    control,
+    rules: { required: 'Goal is required' },
+  });
+  const status = useController({
+    name: 'status',
+    control,
+    rules: { required: 'Status is required' },
+  });
+  const types = useController({
+    name: 'applicationType',
+    control,
+    rules: { required: 'Application type is required' },
+  });
+  const website = register('website');
+  const email = register('email');
+  const submissionDate = register('submissionDate');
+  const notes = register('notes');
 
   const firestore = useFirestore();
   const { data: user } = useUser();
@@ -71,34 +91,39 @@ export default function NewJobForm() {
           <Typography variant="h2">Add job</Typography>
         </CardHeader>
         <CardBody className="grid grid-flow-dense gap-6 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-          <ThemedInput
-            {...register('position', { required: 'Email is required' })}
-            error={errors.position}
+          <ThemedInput {...position} error={errors.position} />
+
+          <ThemedInput {...company} error={errors.company} />
+
+          <ThemedInput {...location} error={errors.location} />
+
+          <ThemedInput {...address} error={errors.address} />
+
+          <FirestoreSelect
+            collection="goals"
+            {...goal.field}
+            error={errors.goal}
           />
 
-          <ThemedInput
-            {...register('company', { required: 'Company is required' })}
-            error={errors.company}
+          <FirestoreSelect
+            collection="status"
+            {...status.field}
+            error={errors.status}
           />
 
-          <ThemedInput
-            {...register('location', { required: 'Location is required' })}
-            error={errors.location}
+          <FirestoreSelect
+            collection="application_types"
+            {...types.field}
+            error={errors.applicationType}
           />
 
-          <ThemedInput {...register('address')} />
+          <ThemedInput {...website} type="url" />
 
-          <FirestoreSelect collection="goals" {...goal.field} />
-          <FirestoreSelect collection="status" {...status.field} />
-          <FirestoreSelect collection="application_types" {...types.field} />
-          <ThemedInput {...register('website')} type="url" />
+          <ThemedInput {...email} />
 
-          <ThemedInput {...register('email')} />
-          <ThemedInput {...register('submissionDate')} type="date" />
-          <ThemedTextArea
-            {...register('notes')}
-            containerClassName="md:col-span-2"
-          />
+          <ThemedInput {...submissionDate} type="date" />
+
+          <ThemedTextArea {...notes} containerClassName="md:col-span-2" />
         </CardBody>
 
         <CardFooter className="mx-auto flex w-full flex-col gap-4 lg:w-1/2 lg:flex-row">
