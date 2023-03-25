@@ -1,31 +1,33 @@
-import { Input } from '@material-tailwind/react';
+import { Textarea } from '@material-tailwind/react';
 import { ComponentProps, forwardRef } from 'react';
 import { FieldError } from 'react-hook-form';
 import InputErrorMessage from './InputErrorMessage';
 
-type Ref = HTMLInputElement;
+type Ref = HTMLDivElement;
 type Props = Omit<
-  ComponentProps<typeof Input>,
-  'color' | 'label' | 'aria-invalid' | 'error'
+  ComponentProps<typeof Textarea>,
+  'color' | 'aria-invalid' | 'error'
 > & {
   error?: FieldError;
   containerClassName?: string;
 };
 
-const ThemedInput = forwardRef<Ref, Props>((props, ref) => {
+const ThemedTextArea = forwardRef<Ref, Props>((props, ref) => {
   const { error, containerClassName, ...rest } = props;
 
-  const label = props.name
-    ? props.name.charAt(0).toUpperCase() + props.name.slice(1)
-    : props.type;
-  const type = props.type ?? props.name ?? 'text';
+  const name =
+    props.name &&
+    (props.name?.charAt(0).toUpperCase() + props.name?.slice(1)).replace(
+      /([A-Z])/g,
+      ' $1'
+    );
+  const label = props.label ? props.label : name ?? 'Text';
 
   return (
     <div className={containerClassName}>
-      <Input
+      <Textarea
         ref={ref}
         label={label}
-        type={type}
         aria-invalid={error ? 'true' : 'false'}
         error={!!error}
         color="deep-purple"
@@ -36,6 +38,6 @@ const ThemedInput = forwardRef<Ref, Props>((props, ref) => {
   );
 });
 
-ThemedInput.displayName = 'ThemedInput';
+ThemedTextArea.displayName = 'ThemedTextArea';
 
-export default ThemedInput;
+export default ThemedTextArea;

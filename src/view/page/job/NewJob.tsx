@@ -1,12 +1,8 @@
-import { Typography } from '@material-tailwind/react';
 import withPageTitle from '../../../common/component/hoc/withPageTitle';
+import NewJobForm from '../../form/NewJobForm';
 
 function NewJob() {
-  return (
-    <>
-      <Typography variant="h2">New Job page</Typography>
-    </>
-  );
+  return <NewJobForm />;
 }
 
 NewJob.displayName = 'NewJob';
