@@ -1,22 +1,20 @@
-import JobApplicationType from './JobApplicationType';
-import JobGoal from './JobGoal';
-import JobStatus from './JobStatus';
-import User from './User';
+import Model, { CreateModel } from './Model';
 
-type Job = {
-  id: string;
+type Job = Model & {
   position: string;
   company: string;
   location: string;
-  user: User;
+  userId: string;
   address?: string;
   website?: string;
   email?: string;
   notes?: string;
   submissionDate?: Date;
-  goal?: JobGoal;
-  status?: JobStatus;
-  applicationType?: JobApplicationType;
+  goalId?: string;
+  statusId?: string;
+  applicationTypeId?: string;
 };
+
+export type CreateJob = CreateModel<Job>;
 
 export type { Job };

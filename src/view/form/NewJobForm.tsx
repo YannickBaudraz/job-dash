@@ -6,17 +6,27 @@ import {
   CardHeader,
   Typography,
 } from '@material-tailwind/react';
-import { useCallback, useEffect, useState } from 'react';
+import { addDoc, collection } from 'firebase/firestore';
+import { useCallback } from 'react';
 import { useController, useForm } from 'react-hook-form';
+import { useFirestore, useUser } from 'reactfire';
+import FirestoreSelect from '../../common/component/form/input/FirestoreSelect';
 import ThemedInput from '../../common/component/form/input/ThemedInput';
-import ThemedSelect from '../../common/component/form/input/ThemedSelect';
 import ThemedTextArea from '../../common/component/form/input/ThemedTextArea';
-import { Job } from '../../model/Job';
-import JobApplicationType from '../../model/JobApplicationType';
-import JobGoal from '../../model/JobGoal';
-import JobStatus from '../../model/JobStatus';
+import FirestoreModelConverter from '../../common/converter/FirestoreModelConverter';
+import modelConverter from '../../common/converter/ModelConverter';
+import { cleanBeforeSentToFirestore } from '../../common/firebase/firebaseUtils';
+import { CreateJob, Job } from '../../model/Job';
 
-type Inputs = Omit<Job, 'id'>;
+export type AddJobInputs = Omit<
+  Job,
+  'id' | 'goal' | 'statusId' | 'applicationTypeId' | 'submissionDate'
+> & {
+  goal?: string;
+  status?: string;
+  applicationType?: string;
+  submissionDate?: string;
+};
 
 export default function NewJobForm() {
   const {
@@ -25,25 +35,28 @@ export default function NewJobForm() {
     formState: { errors },
     reset,
     control,
-  } = useForm<Inputs>();
+  } = useForm<AddJobInputs>();
   const goal = useController({ name: 'goal', control });
   const status = useController({ name: 'status', control });
-  const applicationType = useController({ name: 'applicationType', control });
+  const types = useController({ name: 'applicationType', control });
 
-  const [isCleared, setIsCleared] = useState(false);
+  const firestore = useFirestore();
+  const { data: user } = useUser();
+  const addJob = useCallback(async (data: AddJobInputs) => {
+    if (!user) throw new Error('User is not logged in');
 
-  useEffect(() => {
-    if (isCleared) {
-      setIsCleared(false);
-    }
-  }, [isCleared]);
+    const job = modelConverter.fromAddJobInputsToJob(data, user.uid);
+    const cleanedData = cleanBeforeSentToFirestore(job);
 
-  const onSubmit = useCallback((data: Inputs) => {
-    console.log(data);
+    const jobsCollection = collection(firestore, 'jobs').withConverter(
+      new FirestoreModelConverter<CreateJob>().converter
+    );
+    await addDoc(jobsCollection, cleanedData);
+    reset();
   }, []);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(addJob)}>
       <Card>
         <CardHeader
           variant="gradient"
@@ -53,7 +66,7 @@ export default function NewJobForm() {
           <Typography variant="h2">Add job</Typography>
         </CardHeader>
 
-        <CardBody className="grid gap-6 lg:grid-cols-4">
+        <CardBody className="grid grid-flow-dense gap-6 lg:grid-cols-4">
           <ThemedInput
             {...register('position', { required: 'Email is required' })}
             error={errors.position}
@@ -69,39 +82,17 @@ export default function NewJobForm() {
             error={errors.location}
           />
 
-          <ThemedInput {...register('address')} error={errors.address} />
+          <ThemedInput {...register('address')} />
 
-          <ThemedSelect
-            {...goal.field}
-            options={Object.values(JobGoal)}
-            error={errors.goal}
-          />
+          <FirestoreSelect collection="goals" {...goal.field} />
+          <FirestoreSelect collection="status" {...status.field} />
+          <FirestoreSelect collection="application_types" {...types.field} />
+          <ThemedInput {...register('website')} />
 
-          <ThemedSelect
-            {...status.field}
-            options={Object.values(JobStatus)}
-            error={errors.status}
-          />
-
-          <ThemedSelect
-            {...applicationType.field}
-            options={Object.values(JobApplicationType)}
-            error={errors.applicationType}
-          />
-
-          <ThemedInput {...register('website')} error={errors.website} />
-
-          <ThemedInput {...register('email')} error={errors.email} />
-
-          <ThemedInput
-            {...register('submissionDate')}
-            error={errors.submissionDate}
-            type="date"
-          />
-
+          <ThemedInput {...register('email')} />
+          <ThemedInput {...register('submissionDate')} type="date" />
           <ThemedTextArea
             {...register('notes')}
-            error={errors.notes}
             containerClassName="lg:col-span-2"
           />
         </CardBody>
@@ -116,6 +107,7 @@ export default function NewJobForm() {
           >
             Clear
           </Button>
+
           <Button type="submit" color="deep-purple" fullWidth>
             Save
           </Button>
