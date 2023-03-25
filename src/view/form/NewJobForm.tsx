@@ -65,7 +65,6 @@ export default function NewJobForm() {
         >
           <Typography variant="h2">Add job</Typography>
         </CardHeader>
-
         <CardBody className="grid grid-flow-dense gap-6 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           <ThemedInput
             {...register('position', { required: 'Email is required' })}
@@ -87,7 +86,7 @@ export default function NewJobForm() {
           <FirestoreSelect collection="goals" {...goal.field} />
           <FirestoreSelect collection="status" {...status.field} />
           <FirestoreSelect collection="application_types" {...types.field} />
-          <ThemedInput {...register('website')} />
+          <ThemedInput {...register('website')} type="url" />
 
           <ThemedInput {...register('email')} />
           <ThemedInput {...register('submissionDate')} type="date" />
@@ -96,7 +95,7 @@ export default function NewJobForm() {
             containerClassName="md:col-span-2"
           />
         </CardBody>
-
+        Un oubli
         <CardFooter className="mx-auto flex w-full flex-col gap-4 lg:w-1/2 lg:flex-row">
           <Button
             type="reset"
