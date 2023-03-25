@@ -38,9 +38,21 @@ export default function NewJobForm() {
     reset,
     control,
   } = useForm<AddJobInputs>();
-  const goal = useController({ name: 'goal', control });
-  const status = useController({ name: 'status', control });
-  const types = useController({ name: 'applicationType', control });
+  const goal = useController({
+    name: 'goal',
+    control,
+    rules: { required: 'Goal is required' },
+  });
+  const status = useController({
+    name: 'status',
+    control,
+    rules: { required: 'Status is required' },
+  });
+  const types = useController({
+    name: 'applicationType',
+    control,
+    rules: { required: 'Application type is required' },
+  });
 
   const firestore = useFirestore();
   const { data: user } = useUser();
@@ -70,6 +82,7 @@ export default function NewJobForm() {
         >
           <Typography variant="h2">Add job</Typography>
         </CardHeader>
+
         <CardBody className="grid grid-flow-dense gap-6 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           <ThemedInput
             {...register('position', { required: 'Email is required' })}
@@ -86,15 +99,35 @@ export default function NewJobForm() {
             error={errors.location}
           />
 
-          <ThemedInput {...register('address')} />
+          <ThemedInput
+            {...register('address', { required: 'Address is required' })}
+            error={errors.address}
+          />
 
-          <FirestoreSelect collection="goals" {...goal.field} />
-          <FirestoreSelect collection="status" {...status.field} />
-          <FirestoreSelect collection="application_types" {...types.field} />
+          <FirestoreSelect
+            collection="goals"
+            {...goal.field}
+            error={errors.goal}
+          />
+
+          <FirestoreSelect
+            collection="status"
+            {...status.field}
+            error={errors.status}
+          />
+
+          <FirestoreSelect
+            collection="application_types"
+            {...types.field}
+            error={errors.applicationType}
+          />
+
           <ThemedInput {...register('website')} type="url" />
 
           <ThemedInput {...register('email')} />
+
           <ThemedInput {...register('submissionDate')} type="date" />
+
           <ThemedTextArea
             {...register('notes')}
             containerClassName="md:col-span-2"
