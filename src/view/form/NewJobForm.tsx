@@ -38,6 +38,10 @@ export default function NewJobForm() {
     reset,
     control,
   } = useForm<AddJobInputs>();
+  const position = register('position', { required: 'Email is required' });
+  const company = register('company', { required: 'Company is required' });
+  const location = register('location', { required: 'Location is required' });
+  const address = register('address', { required: 'Address is required' });
   const goal = useController({
     name: 'goal',
     control,
@@ -53,6 +57,10 @@ export default function NewJobForm() {
     control,
     rules: { required: 'Application type is required' },
   });
+  const website = register('website');
+  const email = register('email');
+  const submissionDate = register('submissionDate');
+  const notes = register('notes');
 
   const firestore = useFirestore();
   const { data: user } = useUser();
@@ -82,27 +90,14 @@ export default function NewJobForm() {
         >
           <Typography variant="h2">Add job</Typography>
         </CardHeader>
-
         <CardBody className="grid grid-flow-dense gap-6 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-          <ThemedInput
-            {...register('position', { required: 'Email is required' })}
-            error={errors.position}
-          />
+          <ThemedInput {...position} error={errors.position} />
 
-          <ThemedInput
-            {...register('company', { required: 'Company is required' })}
-            error={errors.company}
-          />
+          <ThemedInput {...company} error={errors.company} />
 
-          <ThemedInput
-            {...register('location', { required: 'Location is required' })}
-            error={errors.location}
-          />
+          <ThemedInput {...location} error={errors.location} />
 
-          <ThemedInput
-            {...register('address', { required: 'Address is required' })}
-            error={errors.address}
-          />
+          <ThemedInput {...address} error={errors.address} />
 
           <FirestoreSelect
             collection="goals"
@@ -122,16 +117,13 @@ export default function NewJobForm() {
             error={errors.applicationType}
           />
 
-          <ThemedInput {...register('website')} type="url" />
+          <ThemedInput {...website} type="url" />
 
-          <ThemedInput {...register('email')} />
+          <ThemedInput {...email} />
 
-          <ThemedInput {...register('submissionDate')} type="date" />
+          <ThemedInput {...submissionDate} type="date" />
 
-          <ThemedTextArea
-            {...register('notes')}
-            containerClassName="md:col-span-2"
-          />
+          <ThemedTextArea {...notes} containerClassName="md:col-span-2" />
         </CardBody>
 
         <CardFooter className="mx-auto flex w-full flex-col gap-4 lg:w-1/2 lg:flex-row">
