@@ -1,6 +1,6 @@
 import { Button } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
-import { route } from '../../../routing/routes';
+import route from '../../../routing/route';
 
 export default function AlreadyHaveAccountLink() {
   return (

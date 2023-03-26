@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useSigninCheck } from 'reactfire';
 import AllScreenLoader from '../common/component/loader/AllScreenLoader';
-import { route } from './routes';
+import route from './route';
 
 type AuthGateProps = PropsWithChildren & {
   requireGuest?: boolean;

@@ -6,7 +6,7 @@ import ThemedSelect from './ThemedSelect';
 
 type Ref = HTMLInputElement;
 type Props = Omit<ComponentProps<typeof ThemedSelect>, 'options'> & {
-  collection: Extract<CollectionName, 'goals' | 'status' | 'application_types'>;
+  collection: Extract<CollectionName, 'goals' | 'status' | 'contact_types'>;
 };
 
 const FirestoreSelect = forwardRef<Ref, Props>((props, ref) => {

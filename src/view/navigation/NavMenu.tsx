@@ -8,7 +8,7 @@ import { Typography } from '@material-tailwind/react';
 import * as React from 'react';
 import { ReactElement, useMemo } from 'react';
 import { NavLink } from 'react-router-dom';
-import { route } from '../../routing/routes';
+import route from '../../routing/route';
 
 type MenuItem = {
   icon: ReactElement<React.SVGProps<SVGSVGElement>>;
@@ -32,7 +32,7 @@ export default function NavMenu({ className }: { className?: string }) {
       {
         icon: <DocumentPlusIcon />,
         title: 'New job',
-        path: route('jobs.create'),
+        path: route('jobsCreate'),
       },
       {
         icon: <UserCircleIcon />,

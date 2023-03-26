@@ -7,25 +7,7 @@ import Dashboard from '../view/page/Dashboard';
 import AllJobs from '../view/page/job/Jobs';
 import NewJob from '../view/page/job/NewJob';
 import Profile from '../view/page/Profile';
-
-type RoutePathMap<RoutePath extends Record<string, string>> = {
-  readonly [K in keyof RoutePath]: RoutePath[K];
-};
-
-const RoutePaths = {
-  home: '/',
-  jobs: '/jobs',
-  'jobs.create': '/jobs/create',
-  profile: '/profile',
-  login: '/login',
-  register: '/register',
-} as const;
-
-type RoutePath = RoutePathMap<typeof RoutePaths>;
-
-function route<T extends keyof RoutePath>(path: T): RoutePath[T] {
-  return RoutePaths[path];
-}
+import route from './route';
 
 const routes: RouteObject[] = [
   {
@@ -36,7 +18,7 @@ const routes: RouteObject[] = [
         path: route('jobs'),
         children: [
           { index: true, element: <AllJobs /> },
-          { path: route('jobs.create'), element: <NewJob /> },
+          { path: route('jobsCreate'), element: <NewJob /> },
         ],
       },
       { path: route('profile'), element: <Profile /> },
@@ -54,7 +36,5 @@ const routes: RouteObject[] = [
     element: <div>404</div>,
   },
 ];
-
-export { route };
 
 export default routes;
