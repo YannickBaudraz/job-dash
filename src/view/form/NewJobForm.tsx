@@ -18,7 +18,7 @@ import FirestoreModelConverter from '../../common/converter/FirestoreModelConver
 import modelConverter from '../../common/converter/ModelConverter';
 import { cleanBeforeSentToFirestore } from '../../common/firebase/firebaseUtils';
 import { CreateJob, Job } from '../../model/Job';
-import { route } from '../../routing/routes';
+import route from '../../routing/route';
 
 export type AddJobInputs = Omit<
   Job,
@@ -38,6 +38,8 @@ export default function NewJobForm() {
     reset,
     control,
   } = useForm<AddJobInputs>();
+
+  //region Get inputs
   const position = register('position', { required: 'Email is required' });
   const company = register('company', { required: 'Company is required' });
   const location = register('location', { required: 'Location is required' });
@@ -61,7 +63,9 @@ export default function NewJobForm() {
   const email = register('email');
   const submissionDate = register('submissionDate');
   const notes = register('notes');
+  //endregion
 
+  //region Add job
   const firestore = useFirestore();
   const { data: user } = useUser();
   const navigate = useNavigate();
@@ -79,6 +83,7 @@ export default function NewJobForm() {
 
     navigate(route('jobs'));
   }, []);
+  //endregion
 
   return (
     <form onSubmit={handleSubmit(addJob)}>

@@ -19,7 +19,7 @@ export default function DashboardLayout() {
           {isLaptop ? <LaptopSidebar /> : <MobileSidebar />}
           <div>
             <TopBar />
-            <main className="mx-auto w-[90%] pt-16">
+            <main className="mx-auto w-[90%] pt-4 lg:pt-8">
               <Outlet />
             </main>
           </div>

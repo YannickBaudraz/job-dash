@@ -18,7 +18,7 @@ function Jobs() {
           {jobs?.length} Job{isPlural ? 's' : ''} Found
         </Typography>
       </header>
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 pb-4 md:pb-8 lg:grid-cols-2">
         {jobs?.map(job => (
           <JobCard key={job.id} job={job} />
         ))}
