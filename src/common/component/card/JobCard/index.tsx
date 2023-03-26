@@ -5,7 +5,9 @@ import {
   CardFooter,
   CardHeader,
 } from '@material-tailwind/react';
+import { useNavigate } from 'react-router-dom';
 import { Job } from '../../../../model/Job';
+import route from '../../../../routing/route';
 import useDestroyDocument from '../../../hook/useDestroyDocument';
 import Modal from '../../Modal';
 import AddressItem from './AddressItem';
@@ -20,6 +22,7 @@ type Props = {
 };
 
 export default function JobCard({ job }: Props) {
+  const navigate = useNavigate();
   const destroy = useDestroyDocument('jobs', job.id);
 
   return (
@@ -46,7 +49,13 @@ export default function JobCard({ job }: Props) {
           <StatusItem statusId={job.statusId} />
 
           <section className="flex gap-2">
-            <Button color="teal">Edit</Button>
+            <Button
+              color="teal"
+              onClick={() => navigate(route('jobs.edit', { id: job.id }))}
+            >
+              Edit
+            </Button>
+
             <Modal
               onConfirm={destroy}
               buttonText="Delete"

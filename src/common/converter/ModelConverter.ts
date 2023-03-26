@@ -1,5 +1,5 @@
 import { CreateJob } from '../../model/Job';
-import { AddJobInputs } from '../../view/form/NewJobForm';
+import { AddJobInputs } from '../../view/form/JobForm';
 
 class ModelConverter {
   public fromAddJobInputsToJob(
