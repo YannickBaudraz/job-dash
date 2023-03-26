@@ -13,7 +13,6 @@ const statusColors = [
 /** @type {import('tailwindcss').Config} */
 const tailwindConfig = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
-  darkMode: false, // or 'media' or 'class'
   safelist: [
     ...statusColors.map(color => `bg-${color}-50`),
     ...statusColors.map(color => `text-${color}-900`),
