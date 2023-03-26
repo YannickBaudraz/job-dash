@@ -3,4 +3,4 @@ export type CollectionName =
   | 'goals'
   | 'status'
   | 'users'
-  | 'application_types';
+  | 'contact_types';

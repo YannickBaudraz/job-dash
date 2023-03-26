@@ -112,7 +112,7 @@ export default function NewJobForm() {
           />
 
           <FirestoreSelect
-            collection="application_types"
+            collection="contact_types"
             {...types.field}
             error={errors.contactType}
           />

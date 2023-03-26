@@ -24,7 +24,7 @@ export default function useLiveCollection<T extends Model>(
     { idField: 'id' }
   );
 
-  if (error) throw error;
+  if (status === 'error') throw error;
 
   return { data: data ?? [], status };
 }
