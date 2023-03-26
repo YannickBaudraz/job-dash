@@ -28,7 +28,7 @@ class ModelConverter {
       address: inputs.address,
       goalId: inputs.goal,
       statusId: inputs.status,
-      applicationTypeId: inputs.applicationType,
+      contactTypeId: inputs.contactType,
       website: inputs.website,
       email: inputs.email,
       submissionDate: submissionDate,

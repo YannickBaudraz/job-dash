@@ -7,7 +7,7 @@ type Job = Model & {
   location: string;
   address: string;
   statusId: string;
-  applicationTypeId: string;
+  contactTypeId: string;
   goalId: string;
   website?: string;
   email?: string;

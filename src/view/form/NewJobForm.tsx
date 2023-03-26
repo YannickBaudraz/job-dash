@@ -22,11 +22,11 @@ import { route } from '../../routing/routes';
 
 export type AddJobInputs = Omit<
   Job,
-  'id' | 'goal' | 'statusId' | 'applicationTypeId' | 'submissionDate'
+  'id' | 'goal' | 'statusId' | 'contactTypeId' | 'submissionDate'
 > & {
   goal: string;
   status: string;
-  applicationType: string;
+  contactType: string;
   submissionDate?: string;
 };
 
@@ -53,7 +53,7 @@ export default function NewJobForm() {
     rules: { required: 'Status is required' },
   });
   const types = useController({
-    name: 'applicationType',
+    name: 'contactType',
     control,
     rules: { required: 'Application type is required' },
   });
@@ -114,7 +114,7 @@ export default function NewJobForm() {
           <FirestoreSelect
             collection="application_types"
             {...types.field}
-            error={errors.applicationType}
+            error={errors.contactType}
           />
 
           <ThemedInput {...website} type="url" />
