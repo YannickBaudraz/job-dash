@@ -6,6 +6,8 @@ import {
   CardHeader,
 } from '@material-tailwind/react';
 import { Job } from '../../../../model/Job';
+import useDestroyDocument from '../../../hook/useDestroyDocument';
+import Modal from '../../Modal';
 import AddressItem from './AddressItem';
 import GoalItem from './GoalItem';
 import HeaderText from './HeaderText';
@@ -18,6 +20,8 @@ type Props = {
 };
 
 export default function JobCard({ job }: Props) {
+  const destroy = useDestroyDocument('jobs', job.id);
+
   return (
     <article>
       <Card className="h-full justify-between">
@@ -43,7 +47,15 @@ export default function JobCard({ job }: Props) {
 
           <section className="flex gap-2">
             <Button color="teal">Edit</Button>
-            <Button color="pink">Delete</Button>
+            <Modal
+              onConfirm={destroy}
+              buttonText="Delete"
+              buttonColor="pink"
+              headerText="Delete Job"
+              text="Are you sure you want to delete this job?"
+              size="xs"
+              risky
+            />
           </section>
         </CardFooter>
       </Card>
