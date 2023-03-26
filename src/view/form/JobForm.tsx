@@ -6,21 +6,16 @@ import {
   CardHeader,
   Typography,
 } from '@material-tailwind/react';
-import { addDoc, collection } from 'firebase/firestore';
 import { useCallback } from 'react';
 import { useController, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { useFirestore, useUser } from 'reactfire';
 import FirestoreSelect from '../../common/component/form/input/FirestoreSelect';
 import ThemedInput from '../../common/component/form/input/ThemedInput';
 import ThemedTextArea from '../../common/component/form/input/ThemedTextArea';
-import FirestoreModelConverter from '../../common/converter/FirestoreModelConverter';
-import modelConverter from '../../common/converter/ModelConverter';
-import { cleanBeforeSentToFirestore } from '../../common/firebase/firebaseUtils';
-import { CreateJob, Job } from '../../model/Job';
-import route from '../../routing/route';
+import useAddJob from '../../common/hook/useAddJob';
+import useUpdateJob from '../../common/hook/useUpdateJob';
+import { Job } from '../../model/Job';
 
-export type AddJobInputs = Omit<
+export type JobFormInputs = Omit<
   Job,
   'id' | 'goal' | 'statusId' | 'contactTypeId' | 'submissionDate'
 > & {
@@ -30,70 +25,83 @@ export type AddJobInputs = Omit<
   submissionDate?: string;
 };
 
-export default function NewJobForm() {
+type JobFormProps = {
+  job?: Job;
+};
+
+export default function JobForm({ job }: JobFormProps) {
   const {
     handleSubmit,
     register,
     formState: { errors },
     reset,
     control,
-  } = useForm<AddJobInputs>();
+  } = useForm<JobFormInputs>();
 
-  //region Get inputs
-  const position = register('position', { required: 'Email is required' });
-  const company = register('company', { required: 'Company is required' });
-  const location = register('location', { required: 'Location is required' });
-  const address = register('address', { required: 'Address is required' });
+  //region Inputs
+  const position = register('position', {
+    required: 'Email is required',
+    value: job?.position,
+  });
+  const company = register('company', {
+    required: 'Company is required',
+    value: job?.company,
+  });
+  const location = register('location', {
+    required: 'Location is required',
+    value: job?.location,
+  });
+  const address = register('address', {
+    required: 'Address is required',
+    value: job?.address,
+  });
   const goal = useController({
     name: 'goal',
     control,
     rules: { required: 'Goal is required' },
+    defaultValue: job?.goalId,
   });
   const status = useController({
     name: 'status',
     control,
     rules: { required: 'Status is required' },
+    defaultValue: job?.statusId,
   });
   const types = useController({
     name: 'contactType',
     control,
     rules: { required: 'Application type is required' },
+    defaultValue: job?.contactTypeId,
   });
-  const website = register('website');
-  const email = register('email');
-  const submissionDate = register('submissionDate');
-  const notes = register('notes');
+  const website = register('website', { value: job?.website });
+  const email = register('email', { value: job?.email });
+  const submissionDate = register('submissionDate', {
+    value: job?.submissionDate?.toISOString().split('T')[0],
+  });
+  const notes = register('notes', { value: job?.notes });
   //endregion
 
-  //region Add job
-  const firestore = useFirestore();
-  const { data: user } = useUser();
-  const navigate = useNavigate();
-  const addJob = useCallback(async (data: AddJobInputs) => {
-    if (!user) throw new Error('User is not logged in');
+  //region Submit
+  const addJob = useAddJob();
+  const updateJob = useUpdateJob();
 
-    const job = modelConverter.fromAddJobInputsToJob(data, user.uid);
-    const cleanedData = cleanBeforeSentToFirestore(job);
-
-    const jobsCollection = collection(firestore, 'jobs').withConverter(
-      new FirestoreModelConverter<CreateJob>().converter
-    );
-
-    await addDoc(jobsCollection, cleanedData);
-
-    navigate(route('jobs'));
-  }, []);
+  const submit = useCallback(
+    async (data: JobFormInputs) => {
+      !job ? await addJob(data) : await updateJob({ ...data, id: job.id });
+    },
+    [job, addJob, updateJob]
+  );
   //endregion
 
   return (
-    <form onSubmit={handleSubmit(addJob)}>
+    <form onSubmit={handleSubmit(submit)} className="mt-6 md:mt-8">
       <Card>
         <CardHeader
           variant="gradient"
           color="deep-purple"
           className="mb-4 grid place-items-center py-6"
         >
-          <Typography variant="h2">Add job</Typography>
+          <Typography variant="h2">{job ? 'Edit job' : 'Add job'}</Typography>
         </CardHeader>
         <CardBody className="grid grid-flow-dense gap-6 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           <ThemedInput {...position} error={errors.position} />
@@ -122,7 +130,7 @@ export default function NewJobForm() {
             error={errors.contactType}
           />
 
-          <ThemedInput {...website} type="url" />
+          <ThemedInput {...website} />
 
           <ThemedInput {...email} />
 

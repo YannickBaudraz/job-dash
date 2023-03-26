@@ -32,7 +32,7 @@ export default function NavMenu({ className }: { className?: string }) {
       {
         icon: <DocumentPlusIcon />,
         title: 'New job',
-        path: route('jobsCreate'),
+        path: route('jobs.create'),
       },
       {
         icon: <UserCircleIcon />,

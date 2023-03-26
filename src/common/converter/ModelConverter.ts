@@ -1,9 +1,9 @@
 import { CreateJob } from '../../model/Job';
-import { AddJobInputs } from '../../view/form/NewJobForm';
+import { JobFormInputs } from '../../view/form/JobForm';
 
 class ModelConverter {
   public fromAddJobInputsToJob(
-    inputs: AddJobInputs,
+    inputs: JobFormInputs,
     userId: string
   ): CreateJob {
     const requiredFields = [

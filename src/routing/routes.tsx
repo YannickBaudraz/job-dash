@@ -4,6 +4,7 @@ import DashboardLayout from '../view/layout/DashboardLayout';
 import Login from '../view/page/auth/Login';
 import Register from '../view/page/auth/Register';
 import Dashboard from '../view/page/Dashboard';
+import EditJob from '../view/page/job/EditJob';
 import AllJobs from '../view/page/job/Jobs';
 import NewJob from '../view/page/job/NewJob';
 import Profile from '../view/page/Profile';
@@ -18,7 +19,8 @@ const routes: RouteObject[] = [
         path: route('jobs'),
         children: [
           { index: true, element: <AllJobs /> },
-          { path: route('jobsCreate'), element: <NewJob /> },
+          { path: route('jobs.create'), element: <NewJob /> },
+          { path: route('jobs.edit'), element: <EditJob /> },
         ],
       },
       { path: route('profile'), element: <Profile /> },
