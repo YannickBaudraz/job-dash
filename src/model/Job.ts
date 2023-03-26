@@ -1,18 +1,18 @@
 import Model, { CreateModel } from './Model';
 
 type Job = Model & {
+  userId: string;
   position: string;
   company: string;
   location: string;
-  userId: string;
-  address?: string;
+  address: string;
+  statusId: string;
+  applicationTypeId: string;
+  goalId: string;
   website?: string;
   email?: string;
   notes?: string;
   submissionDate?: Date;
-  goalId?: string;
-  statusId?: string;
-  applicationTypeId?: string;
 };
 
 export type CreateJob = CreateModel<Job>;

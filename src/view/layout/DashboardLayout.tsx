@@ -14,7 +14,7 @@ export default function DashboardLayout() {
 
   return (
     <AuthGate>
-      <div className="grid h-screen grid-cols-[auto,min-content] bg-blue-gray-50/50 lg:grid-cols-[min-content,1fr]">
+      <div className="grid grid-cols-[auto,min-content] bg-blue-gray-50/50 lg:grid-cols-[min-content,1fr]">
         <ClickOutsideSidebarProvider>
           {isLaptop ? <LaptopSidebar /> : <MobileSidebar />}
           <div>
