@@ -9,6 +9,8 @@ export default function useDocument<T extends Model>(
   collectionName: CollectionName,
   id: string
 ) {
+  if (!id) throw new Error('id is required.');
+
   const firestore = useFirestore();
 
   const converter = useMemo(
@@ -17,7 +19,8 @@ export default function useDocument<T extends Model>(
   );
 
   const { data, status, error } = useFirestoreDocData<T>(
-    doc(firestore, collectionName, id).withConverter(converter)
+    doc(firestore, collectionName, id).withConverter(converter),
+    { idField: 'id' }
   );
 
   if (status === 'error') throw error;

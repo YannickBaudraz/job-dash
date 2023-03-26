@@ -30,7 +30,11 @@ export type AddJobInputs = Omit<
   submissionDate?: string;
 };
 
-export default function NewJobForm() {
+type JobFormProps = {
+  job?: Job;
+};
+
+export default function JobForm({ job }: JobFormProps) {
   const {
     handleSubmit,
     register,
@@ -40,29 +44,46 @@ export default function NewJobForm() {
   } = useForm<AddJobInputs>();
 
   //region Get inputs
-  const position = register('position', { required: 'Email is required' });
-  const company = register('company', { required: 'Company is required' });
-  const location = register('location', { required: 'Location is required' });
-  const address = register('address', { required: 'Address is required' });
+  const position = register('position', {
+    required: 'Email is required',
+    value: job?.position,
+  });
+  const company = register('company', {
+    required: 'Company is required',
+    value: job?.company,
+  });
+  const location = register('location', {
+    required: 'Location is required',
+    value: job?.location,
+  });
+  const address = register('address', {
+    required: 'Address is required',
+    value: job?.address,
+  });
   const goal = useController({
     name: 'goal',
     control,
     rules: { required: 'Goal is required' },
+    defaultValue: job?.goalId,
   });
   const status = useController({
     name: 'status',
     control,
     rules: { required: 'Status is required' },
+    defaultValue: job?.statusId,
   });
   const types = useController({
     name: 'contactType',
     control,
     rules: { required: 'Application type is required' },
+    defaultValue: job?.contactTypeId,
   });
-  const website = register('website');
-  const email = register('email');
-  const submissionDate = register('submissionDate');
-  const notes = register('notes');
+  const website = register('website', { value: job?.website });
+  const email = register('email', { value: job?.email });
+  const submissionDate = register('submissionDate', {
+    value: job?.submissionDate?.toISOString().split('T')[0],
+  });
+  const notes = register('notes', { value: job?.notes });
   //endregion
 
   //region Add job
@@ -86,14 +107,14 @@ export default function NewJobForm() {
   //endregion
 
   return (
-    <form onSubmit={handleSubmit(addJob)}>
+    <form onSubmit={handleSubmit(addJob)} className="mt-6 md:mt-8">
       <Card>
         <CardHeader
           variant="gradient"
           color="deep-purple"
           className="mb-4 grid place-items-center py-6"
         >
-          <Typography variant="h2">Add job</Typography>
+          <Typography variant="h2">{job ? 'Edit job' : 'Add job'}</Typography>
         </CardHeader>
         <CardBody className="grid grid-flow-dense gap-6 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           <ThemedInput {...position} error={errors.position} />
@@ -122,7 +143,7 @@ export default function NewJobForm() {
             error={errors.contactType}
           />
 
-          <ThemedInput {...website} type="url" />
+          <ThemedInput {...website} />
 
           <ThemedInput {...email} />
 
