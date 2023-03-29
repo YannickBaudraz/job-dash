@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import Logo from '../../common/component/media/Logo';
-import { useAppSelector } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { Sidebar } from '../../store/sidebar/sidebarSlice';
 import styles from './LaptopSidebar.module.css';
 import NavMenu from './NavMenu';
 
@@ -9,6 +11,12 @@ import NavMenu from './NavMenu';
  */
 export default function LaptopSidebar() {
   const { isOpen } = useAppSelector(state => state.sidebar);
+  const dispatch = useAppDispatch();
+  const open = () => dispatch(Sidebar.Actions.open());
+
+  useEffect(() => {
+    open();
+  }, []);
 
   return (
     <aside
