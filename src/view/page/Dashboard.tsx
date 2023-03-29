@@ -1,13 +1,8 @@
-import { Typography } from '@material-tailwind/react';
 import withPageTitle from '../../common/component/hoc/withPageTitle';
+import StatsContainer from '../../common/component/stat/StatsContainer';
 
 function Dashboard() {
-  return (
-    <Typography variant="h1">
-      Vite + React + Typescript + Material Tailwind + Redux + Firebase + React
-      Router
-    </Typography>
-  );
+  return <StatsContainer />;
 }
 
 Dashboard.displayName = 'Dashboard';
