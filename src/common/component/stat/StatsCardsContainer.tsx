@@ -4,9 +4,10 @@ import { Status } from '../../../model/Status';
 import useLiveCollection from '../../hook/useLiveCollection';
 import { statusColors } from '../../type/colors';
 import Loader from '../loader/Loader';
-import StatsCard from './StatsCard';
+import StatusStatsCard from './StatusStatsCard';
+import TotalCard from './TotalCard';
 
-export default function StatsContainer() {
+export default function StatsCardsContainer() {
   const { data: statusData, status } = useLiveCollection<EnumModel>('status');
 
   const getStatusBySlug = useCallback(
@@ -21,24 +22,31 @@ export default function StatsContainer() {
   const interview = getStatusBySlug('declined');
 
   return (
-    <div className="grid gap-4 lg:grid-cols-3">
+    <section className="grid gap-4 lg:grid-cols-3">
       {applied ? (
-        <StatsCard statusId={applied.id} color={statusColors.applied} />
+        <StatusStatsCard statusId={applied.id} color={statusColors.applied} />
       ) : (
         <div></div>
       )}
 
       {pending ? (
-        <StatsCard statusId={pending.id} color={statusColors.interview} />
+        <StatusStatsCard statusId={pending.id} color={statusColors.interview} />
       ) : (
         <div></div>
       )}
 
       {interview ? (
-        <StatsCard statusId={interview.id} color={statusColors.declined} />
+        <StatusStatsCard
+          statusId={interview.id}
+          color={statusColors.declined}
+        />
       ) : (
         <div></div>
       )}
-    </div>
+
+      <div className="lg:col-span-3">
+        <TotalCard />
+      </div>
+    </section>
   );
 }

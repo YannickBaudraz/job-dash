@@ -1,8 +1,16 @@
 import withPageTitle from '../../common/component/hoc/withPageTitle';
-import StatsContainer from '../../common/component/stat/StatsContainer';
+import LastYearStats from '../../common/component/stat/LastYearStats';
+import StatsCardsContainer from '../../common/component/stat/StatsCardsContainer';
 
 function Dashboard() {
-  return <StatsContainer />;
+  return (
+    <div className="grid gap-y-8 lg:gap-y-16">
+      <StatsCardsContainer />
+      <div className="mx-auto lg:w-4/5">
+        <LastYearStats />
+      </div>
+    </div>
+  );
 }
 
 Dashboard.displayName = 'Dashboard';
