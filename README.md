@@ -28,6 +28,20 @@ Start the development server
 pnpm dev
 ```
 
+Go to <127.0.0.1:5173> to view the application.
+
+There already is a user created for you to test the application. The user's credentials are:
+
+| Field    | Value         |
+|----------|---------------|
+| Email    | test@user.dev |
+| password | password      |
+
+You can also create a new one, by clicking to the register link and choose between Google, GitHub
+and email+password.
+
+The logout button is in the top right corner, after clicking on the user's dropdown.
+
 ### Production
 
 Build the application and start the production server
