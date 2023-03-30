@@ -1,4 +1,5 @@
 import { CreateJob } from '../../model/Job';
+import { EditProfileFormInputs } from '../../view/form/EditProfileForm';
 import { JobFormInputs } from '../../view/form/JobForm';
 
 class ModelConverter {
@@ -33,6 +34,18 @@ class ModelConverter {
       email: inputs.email,
       submissionDate: submissionDate,
       notes: inputs.notes,
+    };
+  }
+
+  public fromUserFormInputsToFirestoreUser(
+    inputs: EditProfileFormInputs,
+    userId: string
+  ) {
+    return {
+      id: userId,
+      name: inputs.name,
+      email: inputs.email,
+      location: inputs.location,
     };
   }
 }

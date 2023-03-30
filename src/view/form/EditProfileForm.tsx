@@ -10,14 +10,15 @@ import { updateEmail, updateProfile } from 'firebase/auth';
 import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useAuth, useUser } from 'reactfire';
+import { useUser } from 'reactfire';
 import ThemedInput from '../../common/component/form/input/ThemedInput';
 import Loader from '../../common/component/loader/Loader';
 import useDocument from '../../common/hook/usedocument';
+import useUpsertFirestoreUser from '../../common/hook/useUpsertFirestoreUser';
 import User from '../../model/User';
 import route from '../../routing/route';
 
-type EditProfileFormInputs = Omit<User, 'id'>;
+export type EditProfileFormInputs = Omit<User, 'id'>;
 
 export function EditProfileForm() {
   const {
@@ -37,16 +38,17 @@ export function EditProfileForm() {
     name: authUser?.displayName,
   };
 
-  const auth = useAuth();
   const navigate = useNavigate();
+  const updateFirestoreUser = useUpsertFirestoreUser();
   const submit = useCallback(
     async (data: EditProfileFormInputs) => {
-      if (!auth.currentUser) return;
+      if (!authUser) return;
 
-      await updateEmail(auth.currentUser, data.email);
-      await updateProfile(auth.currentUser, {
+      await updateEmail(authUser, data.email);
+      await updateProfile(authUser, {
         displayName: data.name,
       });
+      await updateFirestoreUser(data, authUser.uid);
 
       navigate(route('profile'));
     },

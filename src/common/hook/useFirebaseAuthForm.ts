@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from 'reactfire';
 import { AuthInputs, getAuthError } from '../firebase/authErrors';
+import useUpsertFirestoreUser from './useUpsertFirestoreUser';
 
 /**
  * @description A custom hook that provides a form for authentication with Firebase. <br/>
@@ -49,6 +50,8 @@ export default function useFirebaseAuthForm() {
     }
   }
 
+  const addFirestoreUser = useUpsertFirestoreUser();
+
   async function register(data: AuthInputs) {
     setIsLoading(true);
     const { email, password } = data;
@@ -58,6 +61,7 @@ export default function useFirebaseAuthForm() {
         email,
         password
       );
+      await addFirestoreUser(data, userCredential.user.uid);
       reset();
       return userCredential;
     } catch (error) {
