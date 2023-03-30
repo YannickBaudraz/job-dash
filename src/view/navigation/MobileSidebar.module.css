@@ -1,0 +1,13 @@
+.mobile-sidebar {
+  @apply fixed z-[100] h-full min-h-screen w-[16rem] bg-white bg-opacity-75 shadow-xl backdrop-blur-2xl backdrop-saturate-200;
+
+  transition: margin-left 0.3s linear;
+}
+
+.open {
+  @apply ml-0;
+}
+
+.closed {
+  @apply -ml-96;
+}

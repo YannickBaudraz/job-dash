@@ -221,3 +221,17 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# Logs
+pnpm-debug.log*
+
+dist-ssr
+*.local
+
+# Editor directories and files
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+

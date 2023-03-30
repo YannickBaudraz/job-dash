@@ -1,0 +1,10 @@
+### Folders
+node_modules
+dist
+doc
+public
+src/assets
+
+### Files
+package.json
+pnpm-lock.yaml
