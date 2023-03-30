@@ -3,7 +3,7 @@ const withMT = require('@material-tailwind/react/utils/withMT');
 const statusColors = [
   'blue-gray',
   'purple',
-  'orange',
+  'amber',
   'brown',
   'indigo',
   'green',
@@ -16,6 +16,7 @@ const tailwindConfig = {
   safelist: [
     ...statusColors.map(color => `bg-${color}-50`),
     ...statusColors.map(color => `text-${color}-900`),
+    ...statusColors.map(color => `border-b-${color}-500`),
   ],
   theme: {
     extend: {},
