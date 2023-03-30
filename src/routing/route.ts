@@ -8,6 +8,7 @@ const RoutePaths = {
   'jobs.create': '/jobs/create',
   'jobs.edit': '/jobs/:id/edit',
   profile: '/profile',
+  'profile.edit': '/profile/edit',
   login: '/login',
   register: '/register',
 } as const;

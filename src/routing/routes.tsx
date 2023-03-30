@@ -7,7 +7,8 @@ import Dashboard from '../view/page/Dashboard';
 import EditJob from '../view/page/job/EditJob';
 import AllJobs from '../view/page/job/Jobs';
 import NewJob from '../view/page/job/NewJob';
-import Profile from '../view/page/Profile';
+import { EditProfile } from '../view/page/profile/EditProfile';
+import Profile from '../view/page/profile/Profile';
 import route from './route';
 
 const routes: RouteObject[] = [
@@ -23,7 +24,13 @@ const routes: RouteObject[] = [
           { path: route('jobs.edit'), element: <EditJob /> },
         ],
       },
-      { path: route('profile'), element: <Profile /> },
+      {
+        path: route('profile'),
+        children: [
+          { index: true, element: <Profile /> },
+          { path: route('profile.edit'), element: <EditProfile /> },
+        ],
+      },
     ],
   },
   {
