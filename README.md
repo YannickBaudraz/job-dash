@@ -20,17 +20,11 @@ For specifications, see [Specs.md](doc/Specs.md).
 
 ## Usage
 
-### Development
+### Demo
 
-Start the development server
+Go to https://jobdash-db26d.web.app to see the application.
 
-```shell
-pnpm dev
-```
-
-Go to <127.0.0.1:5173> to view the application.
-
-There already is a user created for you to test the application. The user's credentials are:
+There already is a user created for to test the application. The user's credentials are:
 
 | Field    | Value         |
 |----------|---------------|
@@ -41,6 +35,18 @@ You can also create a new one, by clicking to the register link and choose betwe
 and email+password.
 
 The logout button is in the top right corner, after clicking on the user's dropdown.
+
+### Development
+
+Start the development server
+
+```shell
+pnpm dev
+```
+
+Go to <127.0.0.1:5173> to view the application.
+
+Test user credentials are same as in the demo.
 
 ### Production
 

@@ -32,7 +32,7 @@ export default function MobileSidebar() {
         <IconButton
           color="deep-purple"
           variant="text"
-          className="ml-auto mb-1 mr-1 mt-1 p-0"
+          className="mb-1 ml-auto mr-1 mt-1 p-0"
           onClick={close}
         >
           <XMarkIcon className="h-6 w-6" />

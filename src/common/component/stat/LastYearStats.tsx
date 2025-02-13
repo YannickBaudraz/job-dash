@@ -11,9 +11,17 @@ export default function LastYearStats() {
     return date;
   }, []);
 
-  const { jobs, status } = useUserJobs(
+  const data = useUserJobs(
     where('submission_date', '>=', Timestamp.fromDate(lastYear))
   );
+
+  const dataLegacy = useUserJobs(
+    where('submissionDate', '>=', Timestamp.fromDate(lastYear))
+  );
+
+  const jobs = [...data.jobs, ...dataLegacy.jobs];
+
+  console.log(jobs);
 
   const getJobsByMonth = useCallback(
     (month: number) =>
@@ -21,7 +29,8 @@ export default function LastYearStats() {
     [jobs]
   );
 
-  if (status === 'loading') return <Loader />;
+  if (data.status === 'loading' || dataLegacy.status === 'loading')
+    return <Loader />;
 
   const statsByMonth = Array.from(
     { length: 12 },

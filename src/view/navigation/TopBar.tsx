@@ -9,7 +9,7 @@ export function TopBar() {
   const title = documentTitle.split(' - ')[1] ?? Constants.App.Name;
 
   return (
-    <Navbar className="sticky top-0 z-50 flex h-24 max-w-full items-center justify-between rounded-none py-4 px-4 shadow-lg lg:py-6 lg:px-16">
+    <Navbar className="sticky top-0 z-50 flex h-24 max-w-full items-center justify-between rounded-none px-4 py-4 shadow-lg lg:px-16 lg:py-6">
       <ToggleSidebarButton />
       <Typography variant="h1" className="text-2xl" color="blue-gray">
         {title}
